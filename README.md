@@ -1,0 +1,65 @@
+# Laravel Blade Kit
+
+A lean, self-hosted admin UI kit for Laravel — built with **Blade components** (the modern `<x-component>` syntax, not `@extends`), **Tailwind CSS v4**, and **Alpine.js**. No Livewire required, no black-box package lock-in.
+
+Unlike most component libraries, Blade Kit doesn't hide behind a package namespace. Installing it **copies real files into your app** — the same components, controllers, and services you'd write by hand — so you own the code from minute one and can change anything without fighting a vendor abstraction.
+
+## What's included
+
+- **Layout**: `<x-layouts.admin>` — sidebar, navbar, command palette, toast container.
+- **Navigation**: config-driven sidebar menu (`config/admin.php` + `MenuService`), breadcrumbs, command palette (⌘K).
+- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, checkbox, radio, toggle, file upload, avatar upload.
+- **Feedback**: alert, toast, empty-state, skeleton, progress bar, spinner.
+- **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, stat-card, accordion.
+- **Overlays**: modal, drawer (slide-over), dropdown, tooltip.
+- **i18n**: every string wrapped in `__()`, Vietnamese as the source language, `lang/en.json` for English — add more locales the same way.
+- **Design tokens**: one `@theme` block (`resources/css/blade-kit.css`) mapping semantic names (`primary`, `neutral`, `danger`, `success`, `warning`, `info`) to Tailwind palettes. Re-skin the whole kit by editing 5 color scales in one file — no Blade file ever needs to change.
+
+## Requirements
+
+- PHP ^8.2
+- Laravel ^11.0 / ^12.0 / ^13.0
+- Tailwind CSS v4 (CSS-first `@theme` config)
+
+## Installation
+
+```bash
+composer require dungnecauoi/laravel-blade-kit
+php artisan blade-kit:install
+```
+
+The installer copies files into your app (skipping anything that already exists — pass `--force` to overwrite) and prints the remaining manual steps, since those touch files it won't edit for you:
+
+```bash
+npm install alpinejs @alpinejs/collapse axios
+```
+
+Then, by hand:
+
+1. `resources/js/app.js` — add `import './blade-kit';`
+2. `resources/css/app.css` — right after `@import 'tailwindcss';`, add `@import './blade-kit.css';`
+3. `routes/web.php` — add `require __DIR__.'/admin.php';`
+4. `bootstrap/app.php` — inside `withMiddleware()`, add `$middleware->web(append: [\App\Http\Middleware\SetLocale::class]);`
+5. `bootstrap/providers.php` — add `App\Providers\AdminServiceProvider::class`
+6. `npm run build`
+
+Visit `/admin/dashboard` and `/admin/ui-kit` (the second is a living catalogue of every component — copy patterns from it).
+
+## Why files, not a package namespace
+
+Component libraries that keep everything inside `vendor/` are easy to install and hard to bend. The moment you need one button variant they didn't think of, you're forking the package or writing CSS overrides around it. Blade Kit ships as source you copy in once — every component is a plain `.blade.php` file in your own `resources/views/components/admin`, editable like any file you wrote yourself.
+
+## Theming
+
+```css
+/* resources/css/app.css */
+@theme {
+    --color-primary-600: var(--color-blue-600); /* was indigo — done */
+}
+```
+
+Every button, badge, focus ring, and active nav state re-skins automatically.
+
+## License
+
+MIT.

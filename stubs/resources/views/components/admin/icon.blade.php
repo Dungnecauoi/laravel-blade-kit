@@ -1,0 +1,53 @@
+@props(['name' => 'circle'])
+
+@php
+    $paths = [
+        'home' => '<path d="M4 11.5 12 4l8 7.5" /><path d="M6 10v9a1 1 0 0 0 1 1h4v-5h2v5h4a1 1 0 0 0 1-1v-9" />',
+        'puzzle' => '<rect x="4" y="4" width="7" height="7" rx="1.5" /><rect x="13" y="4" width="7" height="7" rx="1.5" /><rect x="4" y="13" width="7" height="7" rx="1.5" /><rect x="13" y="13" width="7" height="7" rx="1.5" />',
+        'users' => '<circle cx="9" cy="8" r="3" /><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" /><circle cx="17" cy="9" r="2.5" /><path d="M15.5 14a5 5 0 0 1 4.5 6" />',
+        'settings' => '<circle cx="12" cy="12" r="3" /><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />',
+        'folder' => '<path d="M3 7a1 1 0 0 1 1-1h4l2 2h10a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7Z" />',
+        'chevron-down' => '<polyline points="6 9 12 15 18 9" />',
+        'chevron-up' => '<polyline points="6 15 12 9 18 15" />',
+        'chevron-right' => '<polyline points="9 6 15 12 9 18" />',
+        'chevron-up-down' => '<polyline points="8 9 12 5 16 9" /><polyline points="8 15 12 19 16 15" />',
+        'menu' => '<line x1="4" y1="6" x2="20" y2="6" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="18" x2="20" y2="18" />',
+        'x-mark' => '<line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />',
+        'bell' => '<path d="M6 9a6 6 0 0 1 12 0v5l1.5 3h-15L6 14V9Z" /><path d="M10 20a2 2 0 0 0 4 0" />',
+        'search' => '<circle cx="11" cy="11" r="6" /><line x1="20" y1="20" x2="15.5" y2="15.5" />',
+        'logout' => '<path d="M9 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3" /><line x1="21" y1="12" x2="10" y2="12" /><polyline points="17 8 21 12 17 16" />',
+        'check' => '<polyline points="5 12 10 17 19 7" />',
+        'check-circle' => '<circle cx="12" cy="12" r="9" /><polyline points="8 12.5 11 15.5 16 9" />',
+        'x-circle' => '<circle cx="12" cy="12" r="9" /><line x1="9" y1="9" x2="15" y2="15" /><line x1="15" y1="9" x2="9" y2="15" />',
+        'exclamation-triangle' => '<path d="M12 4 2.5 20h19L12 4Z" /><line x1="12" y1="10" x2="12" y2="15" /><circle cx="12" cy="17.5" r="0.75" fill="currentColor" stroke="none" />',
+        'information-circle' => '<circle cx="12" cy="12" r="9" /><line x1="12" y1="11" x2="12" y2="16" /><circle cx="12" cy="7.5" r="0.75" fill="currentColor" stroke="none" />',
+        'plus' => '<line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />',
+        'minus' => '<line x1="5" y1="12" x2="19" y2="12" />',
+        'eye' => '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" />',
+        'eye-off' => '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><line x1="3" y1="3" x2="21" y2="21" />',
+        'pencil' => '<path d="M4 20h4l10-10-4-4L4 16v4Z" /><line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />',
+        'trash' => '<line x1="4" y1="7" x2="20" y2="7" /><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" /><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />',
+        'dots-vertical' => '<circle cx="12" cy="5" r="1.2" fill="currentColor" stroke="none" /><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none" /><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none" />',
+        'sun' => '<circle cx="12" cy="12" r="4" /><line x1="12" y1="2" x2="12" y2="4" /><line x1="12" y1="20" x2="12" y2="22" /><line x1="4" y1="12" x2="2" y2="12" /><line x1="22" y1="12" x2="20" y2="12" /><line x1="5" y1="5" x2="6.5" y2="6.5" /><line x1="17.5" y1="17.5" x2="19" y2="19" /><line x1="5" y1="19" x2="6.5" y2="17.5" /><line x1="17.5" y1="6.5" x2="19" y2="5" />',
+        'moon' => '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />',
+        'chart-bar' => '<rect x="4" y="12" width="3" height="8" /><rect x="10.5" y="8" width="3" height="12" /><rect x="17" y="4" width="3" height="16" />',
+        'upload' => '<path d="M12 15V4" /><polyline points="8 8 12 4 16 8" /><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />',
+        'circle' => '<circle cx="12" cy="12" r="8" />',
+    ];
+
+    $svgPath = $paths[$name] ?? $paths['circle'];
+@endphp
+
+<svg
+    {{ $attributes->except('class') }}
+    class="{{ $attributes->get('class') ?: 'h-5 w-5' }}"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+>
+    {!! $svgPath !!}
+</svg>
