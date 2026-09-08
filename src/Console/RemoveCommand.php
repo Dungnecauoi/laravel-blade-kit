@@ -4,10 +4,12 @@ namespace LaravelBladeKit\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use LaravelBladeKit\Support\ComponentRegistry;
 
 class RemoveCommand extends Command
 {
-    protected $signature = 'blade-kit:remove {components* : Component names to remove}
+    protected $signature = 'blade-kit:remove {components?* : Component names to remove}
+                            {--all : Remove every component currently installed here}
                             {--force : Remove even if other views still reference it}';
 
     protected $description = 'Remove components this app no longer needs — refuses when another view still uses them';
@@ -16,10 +18,17 @@ class RemoveCommand extends Command
     {
         $force = (bool) $this->option('force');
         $viewsRoot = resource_path('views');
+        $names = $this->resolveNames($files, $viewsRoot);
+
+        if ($names === null) {
+            $this->components->error('Provide one or more component names, or pass --all to remove everything installed here.');
+
+            return self::FAILURE;
+        }
 
         $targets = [];
 
-        foreach ($this->argument('components') as $name) {
+        foreach ($names as $name) {
             $path = $this->locate($files, $viewsRoot, $name);
 
             if ($path === null) {
@@ -32,6 +41,10 @@ class RemoveCommand extends Command
         }
 
         if ($targets === []) {
+            if ($this->option('all')) {
+                $this->components->info('Nothing installed here — nothing to remove.');
+            }
+
             return self::SUCCESS;
         }
 
@@ -59,6 +72,26 @@ class RemoveCommand extends Command
         }
 
         return self::SUCCESS;
+    }
+
+    /**
+     * @return list<string>|null null means the call was invalid (no names, no --all)
+     */
+    private function resolveNames(Filesystem $files, string $viewsRoot): ?array
+    {
+        if ($this->option('all')) {
+            $stubs = dirname(__DIR__, 2).'/stubs';
+            $registry = new ComponentRegistry($files, $stubs);
+
+            return array_values(array_filter(
+                $registry->all(),
+                fn (string $name) => $files->exists($registry->appPathFor($name, $viewsRoot)),
+            ));
+        }
+
+        $names = $this->argument('components');
+
+        return $names !== [] ? $names : null;
     }
 
     private function locate(Filesystem $files, string $viewsRoot, string $name): ?string

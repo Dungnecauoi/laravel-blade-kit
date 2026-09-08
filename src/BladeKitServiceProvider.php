@@ -4,6 +4,7 @@ namespace LaravelBladeKit;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelBladeKit\Console\AddCommand;
+use LaravelBladeKit\Console\CheckCommand;
 use LaravelBladeKit\Console\InstallCommand;
 use LaravelBladeKit\Console\ListCommand;
 use LaravelBladeKit\Console\RemoveCommand;
@@ -23,6 +24,7 @@ class BladeKitServiceProvider extends ServiceProvider
                 AddCommand::class,
                 RemoveCommand::class,
                 ListCommand::class,
+                CheckCommand::class,
             ]);
         }
     }

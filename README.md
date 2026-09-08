@@ -73,7 +73,31 @@ php artisan blade-kit:remove drawer
 php artisan blade-kit:remove drawer --force    # only if you're sure
 ```
 
+Wipe everything installed here with `--all` — handy when Blade Kit was only ever meant to live in the host app (e.g. you installed it into a package's own testbench/workbench app while building views against it, and need a clean slate before publishing that package):
+
+```bash
+php artisan blade-kit:remove --all             # same dependents check as removing by name
+php artisan blade-kit:remove --all --force     # skip the check entirely
+```
+
 `blade-kit:install` (no arguments) remains the "just give me everything" option for getting a full admin panel running in one shot.
+
+## Using Blade Kit as a shared standard across packages
+
+If your own packages ship Blade views that use `<x-admin.xxx>` components, they don't need to bundle a copy of Blade Kit themselves — component tags resolve against whatever the *host app* has installed, regardless of which package's view they appear in. Treat Blade Kit as a peer dependency of the host app: your packages just use the tags, and the app that installs them is the one that runs `blade-kit:install`.
+
+To check whether the current app already has everything a package's views need, scan it with `blade-kit:check` — it reads the actual `<x-admin.xxx>` / `<x-layouts.xxx>` tags used (same dependency-scan approach `blade-kit:add` uses), so there's no manifest to keep in sync by hand:
+
+```bash
+php artisan blade-kit:check vendor/acme/package-1 vendor/acme/package-2
+# Missing components:
+#   table       needed by: vendor/acme/package-1
+#   kanban-board needed by: vendor/acme/package-2
+#
+# Install them with: php artisan blade-kit:add table kanban-board
+```
+
+Configure default paths once in `config/admin.php` (`check_paths`) so plain `blade-kit:check` (no arguments) checks them automatically — useful as a pre-deploy or CI sanity check.
 
 ## Why files, not a package namespace
 

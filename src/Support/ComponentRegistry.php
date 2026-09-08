@@ -195,6 +195,31 @@ class ComponentRegistry
         return array_keys($deps);
     }
 
+    /**
+     * Scan every .blade.php file under $path for <x-admin.xxx> / <x-layouts.xxx>
+     * usage — used by `blade-kit:check` to find out what a given directory
+     * (typically another package's views) needs from this kit, independent
+     * of this kit's own stub graph.
+     *
+     * @return list<string>
+     */
+    public function scanUsedComponents(string $path): array
+    {
+        $used = [];
+
+        foreach ($this->files->allFiles($path) as $file) {
+            if (! str_ends_with($file->getPathname(), '.blade.php')) {
+                continue;
+            }
+
+            foreach ($this->extractDependencies($this->files->get($file->getPathname())) as $name) {
+                $used[$name] = true;
+            }
+        }
+
+        return array_keys($used);
+    }
+
     private function isLayout(string $name): bool
     {
         return $this->files->exists("{$this->layoutsDir}/{$name}.blade.php");

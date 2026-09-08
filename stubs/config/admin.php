@@ -36,6 +36,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Component check paths
+    |--------------------------------------------------------------------------
+    |
+    | Directories `blade-kit:check` (no arguments) scans by default — typically
+    | vendor packages whose views reference <x-admin.xxx> components and expect
+    | this app to have them installed. Pass paths directly to the command to
+    | check somewhere else instead: `blade-kit:check vendor/acme/other-package`.
+    |
+    */
+    'check_paths' => [
+        // base_path('vendor/acme/package-1/resources/views'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Sidebar menu
     |--------------------------------------------------------------------------
     |
