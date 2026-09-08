@@ -52,7 +52,7 @@
                     class="w-full border-0 py-4 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-0"
                     autocomplete="off"
                 >
-                <kbd class="hidden shrink-0 rounded border border-neutral-200 px-1.5 py-0.5 text-xs text-neutral-400 sm:block">Esc</kbd>
+                <x-admin.kbd class="hidden shrink-0 sm:block">Esc</x-admin.kbd>
             </div>
 
             <ul class="max-h-80 overflow-y-auto py-2">
@@ -78,16 +78,16 @@
 
             <div class="hidden items-center gap-x-4 border-t border-neutral-100 px-4 py-2 text-xs text-neutral-400 sm:flex">
                 <span class="flex items-center gap-x-1">
-                    <kbd class="rounded border border-neutral-200 px-1">&uarr;</kbd>
-                    <kbd class="rounded border border-neutral-200 px-1">&darr;</kbd>
+                    <x-admin.kbd>&uarr;</x-admin.kbd>
+                    <x-admin.kbd>&darr;</x-admin.kbd>
                     {{ __('di chuyển') }}
                 </span>
                 <span class="flex items-center gap-x-1">
-                    <kbd class="rounded border border-neutral-200 px-1">Enter</kbd>
+                    <x-admin.kbd>Enter</x-admin.kbd>
                     {{ __('chọn') }}
                 </span>
                 <span class="flex items-center gap-x-1">
-                    <kbd class="rounded border border-neutral-200 px-1">Esc</kbd>
+                    <x-admin.kbd>Esc</x-admin.kbd>
                     {{ __('đóng') }}
                 </span>
             </div>

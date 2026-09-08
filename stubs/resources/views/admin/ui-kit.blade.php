@@ -415,4 +415,122 @@
             {{ __('Mở command palette') }}
         </x-admin.button>
     </x-admin.card>
+
+    {{-- Date picker & Slider --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Date picker">
+            <div class="max-w-xs">
+                <x-admin.date-picker name="date_demo" :label="__('Ngày sinh')" />
+            </div>
+        </x-admin.card>
+
+        <x-admin.card title="Slider">
+            <x-admin.slider name="volume_demo" :label="__('Âm lượng')" :value="40" />
+        </x-admin.card>
+    </div>
+
+    {{-- Toggle group & Rating --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Toggle group">
+            <x-admin.toggle-group
+                name="view_mode_demo"
+                value="list"
+                :options="['list' => __('Danh sách'), 'grid' => __('Lưới'), 'table' => __('Bảng')]"
+            />
+        </x-admin.card>
+
+        <x-admin.card title="Rating">
+            <div class="flex items-center gap-x-6">
+                <x-admin.rating name="rating_demo" :value="3" />
+                <x-admin.rating :value="4" readonly />
+            </div>
+        </x-admin.card>
+    </div>
+
+    {{-- Timeline & Stepper --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Timeline">
+            <x-admin.timeline>
+                <x-admin.timeline-item :title="__('Đơn hàng đã tạo')" time="10:00 - 08/09/2026" icon="plus" color="neutral" />
+                <x-admin.timeline-item :title="__('Đã xác nhận thanh toán')" time="10:05 - 08/09/2026" icon="check" color="success" />
+                <x-admin.timeline-item :title="__('Đang giao hàng')" time="14:20 - 08/09/2026" icon="upload" color="primary" />
+                <x-admin.timeline-item :title="__('Đã giao thành công')" time="—" icon="check" color="neutral" />
+            </x-admin.timeline>
+        </x-admin.card>
+
+        <x-admin.card title="Stepper">
+            <x-admin.stepper
+                :steps="[__('Thông tin'), __('Địa chỉ'), __('Thanh toán'), __('Hoàn tất')]"
+                :current="2"
+            />
+        </x-admin.card>
+    </div>
+
+    {{-- Description list & List group --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Description list">
+            <x-admin.description-list>
+                <x-admin.description-item :label="__('Họ và tên')">Nguyễn Văn An</x-admin.description-item>
+                <x-admin.description-item label="Email">an.nguyen@example.com</x-admin.description-item>
+                <x-admin.description-item :label="__('Vai trò')">
+                    <x-admin.badge color="primary">{{ __('Quản trị viên') }}</x-admin.badge>
+                </x-admin.description-item>
+            </x-admin.description-list>
+        </x-admin.card>
+
+        <x-admin.card title="List group" :padding="false">
+            <x-admin.list-group>
+                <x-admin.list-group-item href="#">
+                    <span>{{ __('Cài đặt tài khoản') }}</span>
+                    <x-admin.icon name="chevron-right" class="h-4 w-4 text-neutral-400" />
+                </x-admin.list-group-item>
+                <x-admin.list-group-item href="#">
+                    <span>{{ __('Bảo mật') }}</span>
+                    <x-admin.icon name="chevron-right" class="h-4 w-4 text-neutral-400" />
+                </x-admin.list-group-item>
+                <x-admin.list-group-item href="#">
+                    <span>{{ __('Thông báo') }}</span>
+                    <x-admin.icon name="chevron-right" class="h-4 w-4 text-neutral-400" />
+                </x-admin.list-group-item>
+            </x-admin.list-group>
+        </x-admin.card>
+    </div>
+
+    {{-- Avatar group, Copy button, Kbd, Split button --}}
+    <x-admin.card title="Avatar group, Copy button, Kbd, Split button">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Avatar group</p>
+                <x-admin.avatar-group :avatars="[
+                    ['name' => 'Nguyễn Văn An'],
+                    ['name' => 'Trần Thị Bình'],
+                    ['name' => 'Lê Hoàng Cường'],
+                    ['name' => 'Phạm Thu Dung'],
+                    ['name' => 'Vũ Minh Đức'],
+                ]" :max="3" />
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Copy button</p>
+                <x-admin.copy-button value="sk_live_9f8a7b6c5d4e3f2g1h" />
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Kbd</p>
+                <div class="flex items-center gap-x-1">
+                    <x-admin.kbd>Ctrl</x-admin.kbd>
+                    <span class="text-neutral-400">+</span>
+                    <x-admin.kbd>K</x-admin.kbd>
+                </div>
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Split button</p>
+                <x-admin.split-button :label="__('Lưu')" variant="primary">
+                    <x-admin.dropdown-link href="#">{{ __('Lưu & tạo mới') }}</x-admin.dropdown-link>
+                    <x-admin.dropdown-link href="#">{{ __('Lưu bản nháp') }}</x-admin.dropdown-link>
+                </x-admin.split-button>
+            </div>
+        </div>
+    </x-admin.card>
 </x-layouts.admin>

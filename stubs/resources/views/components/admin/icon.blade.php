@@ -1,4 +1,4 @@
-@props(['name' => 'circle'])
+@props(['name' => 'circle', 'fill' => 'none'])
 
 @php
     $paths = [
@@ -32,6 +32,9 @@
         'moon' => '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />',
         'chart-bar' => '<rect x="4" y="12" width="3" height="8" /><rect x="10.5" y="8" width="3" height="12" /><rect x="17" y="4" width="3" height="16" />',
         'upload' => '<path d="M12 15V4" /><polyline points="8 8 12 4 16 8" /><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />',
+        'calendar' => '<rect x="3" y="5" width="18" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="3" y1="10" x2="21" y2="10" />',
+        'copy' => '<rect x="9" y="9" width="11" height="11" rx="1.5" /><path d="M5 15V5a2 2 0 0 1 2-2h10" />',
+        'star' => '<path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6L12 3Z" />',
         'circle' => '<circle cx="12" cy="12" r="8" />',
     ];
 
@@ -42,7 +45,7 @@
     {{ $attributes->except('class') }}
     class="{{ $attributes->get('class') ?: 'h-5 w-5' }}"
     viewBox="0 0 24 24"
-    fill="none"
+    fill="{{ $fill }}"
     stroke="currentColor"
     stroke-width="1.5"
     stroke-linecap="round"

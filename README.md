@@ -6,14 +6,19 @@ Unlike most component libraries, Blade Kit doesn't hide behind a package namespa
 
 ## What's included
 
+65 components:
+
 - **Layout**: `<x-layouts.admin>` — sidebar, navbar, command palette, toast container.
 - **Navigation**: config-driven sidebar menu (`config/admin.php` + `MenuService`), breadcrumbs, command palette (⌘K).
-- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, checkbox, radio, toggle, file upload, avatar upload.
+- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload.
 - **Feedback**: alert, toast, empty-state, skeleton, progress bar, spinner.
-- **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, stat-card, accordion.
+- **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, avatar group, stat-card, accordion, timeline, stepper, description list, list group, kbd.
 - **Overlays**: modal, drawer (slide-over), dropdown, tooltip.
+- **Actions**: button, split button, confirm-action (delete confirm + real form submit), copy-to-clipboard.
 - **i18n**: every string wrapped in `__()`, Vietnamese as the source language, `lang/en.json` for English — add more locales the same way.
 - **Design tokens**: one `@theme` block (`resources/css/blade-kit.css`) mapping semantic names (`primary`, `neutral`, `danger`, `success`, `warning`, `info`) to Tailwind palettes. Re-skin the whole kit by editing 5 color scales in one file — no Blade file ever needs to change.
+
+Run `php artisan blade-kit:list` any time to see the full, current list.
 
 ## Requirements
 
@@ -44,6 +49,26 @@ Then, by hand:
 6. `npm run build`
 
 Visit `/admin/dashboard` and `/admin/ui-kit` (the second is a living catalogue of every component — copy patterns from it).
+
+## Installing only what you need
+
+A small project doesn't need all 65 components sitting in `resources/views/components/admin`. Add one at a time — the installer scans each component's own source for `<x-admin.xxx>` references and pulls in whatever it depends on automatically:
+
+```bash
+php artisan blade-kit:list                    # see every available component
+php artisan blade-kit:add stat-card            # also copies card + icon (its dependencies)
+php artisan blade-kit:add button table modal   # install several at once
+```
+
+Remove what you don't use — it refuses if something else in your app still references it, so you can't accidentally break a page:
+
+```bash
+php artisan blade-kit:remove drawer
+# Cannot remove 'drawer' — still used by: resources/views/admin/edit-user.blade.php
+php artisan blade-kit:remove drawer --force    # only if you're sure
+```
+
+`blade-kit:install` (no arguments) remains the "just give me everything" option for getting a full admin panel running in one shot.
 
 ## Why files, not a package namespace
 

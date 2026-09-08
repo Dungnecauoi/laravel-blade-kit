@@ -4,13 +4,16 @@ namespace LaravelBladeKit\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use LaravelBladeKit\Support\CopiesFiles;
 use SplFileInfo;
 
 class InstallCommand extends Command
 {
+    use CopiesFiles;
+
     protected $signature = 'blade-kit:install {--force : Overwrite files that already exist in the app}';
 
-    protected $description = 'Copy the Blade Kit admin components, layout, services, and demo pages into this application';
+    protected $description = 'Copy the whole Blade Kit (all components, layout, services, demo pages) into this application. Use blade-kit:add to install only specific components.';
 
     public function handle(Filesystem $files): int
     {
@@ -39,38 +42,6 @@ class InstallCommand extends Command
             $relative = substr($file->getPathname(), strlen($from) + 1);
             $this->copyFile($files, $file->getPathname(), "{$to}/{$relative}", $force);
         }
-    }
-
-    private function copyFile(Filesystem $files, string $from, string $to, bool $force): void
-    {
-        if ($files->exists($to) && ! $force) {
-            $this->components->twoColumnDetail($this->relative($to), '<fg=yellow>SKIPPED (exists)</>');
-
-            return;
-        }
-
-        $files->ensureDirectoryExists(dirname($to));
-        $files->copy($from, $to);
-        $this->components->twoColumnDetail($this->relative($to), '<fg=green>copied</>');
-    }
-
-    private function mergeLangJson(Filesystem $files, string $from, string $to): void
-    {
-        $incoming = json_decode($files->get($from), true) ?? [];
-
-        if ($files->exists($to)) {
-            $existing = json_decode($files->get($to), true) ?? [];
-            $incoming = array_merge($incoming, $existing);
-        }
-
-        $files->ensureDirectoryExists(dirname($to));
-        $files->put($to, json_encode($incoming, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
-        $this->components->twoColumnDetail($this->relative($to), '<fg=green>merged</>');
-    }
-
-    private function relative(string $path): string
-    {
-        return str_replace(base_path().'/', '', $path);
     }
 
     private function printNextSteps(): void
