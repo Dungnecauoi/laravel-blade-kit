@@ -1,5 +1,7 @@
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
+import anchor from '@alpinejs/anchor';
+import persist from '@alpinejs/persist';
 import axios from 'axios';
 
 window.axios = axios;
@@ -11,6 +13,8 @@ if (token) {
 }
 
 Alpine.plugin(collapse);
+Alpine.plugin(anchor);
+Alpine.plugin(persist);
 
 window.Alpine = Alpine;
 

@@ -11,11 +11,14 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-full font-sans text-neutral-900 antialiased" x-data="{ sidebarOpen: false }">
+<body
+    class="h-full font-sans text-neutral-900 antialiased"
+    x-data="{ sidebarOpen: false, sidebarCollapsed: $persist(false).as('blade-kit-sidebar-collapsed') }"
+>
     <div class="min-h-full">
         <x-admin.sidebar />
 
-        <div class="lg:pl-72">
+        <div class="transition-[padding] duration-200" :class="sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'">
             <x-admin.navbar :title="$title" :notifications="$notifications" />
 
             <main class="py-8">

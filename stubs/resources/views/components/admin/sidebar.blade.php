@@ -1,8 +1,8 @@
 @props([])
 
 <div>
-    {{-- Mobile off-canvas sidebar --}}
-    <div class="relative z-50 lg:hidden" x-show="sidebarOpen" x-cloak>
+    {{-- Mobile off-canvas sidebar — always shows full labels, regardless of desktop collapse state --}}
+    <div class="relative z-50 lg:hidden" x-show="sidebarOpen" x-cloak x-data="{ sidebarCollapsed: false }">
         <div class="fixed inset-0 bg-neutral-900/80" x-show="sidebarOpen" x-transition.opacity></div>
 
         <div class="fixed inset-0 flex">
@@ -30,7 +30,10 @@
     </div>
 
     {{-- Desktop static sidebar --}}
-    <div class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-72 lg:flex-col">
+    <div
+        class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:flex-col lg:transition-[width] lg:duration-200"
+        :class="sidebarCollapsed ? 'lg:w-20' : 'lg:w-72'"
+    >
         @include('admin.partials.sidebar-content')
     </div>
 </div>

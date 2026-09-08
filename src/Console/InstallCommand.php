@@ -48,7 +48,7 @@ class InstallCommand extends Command
     {
         $this->newLine();
         $this->line('  <fg=yellow>Next steps (files below are intentionally left untouched):</>');
-        $this->line('  1. npm install alpinejs @alpinejs/collapse axios');
+        $this->line('  1. npm install alpinejs @alpinejs/collapse @alpinejs/anchor @alpinejs/persist axios');
         $this->line("  2. Import the kit's JS in resources/js/app.js:  import './blade-kit';");
         $this->line("  3. Import the kit's tokens in resources/css/app.css, right after @import 'tailwindcss':");
         $this->line("     @import './blade-kit.css';");
