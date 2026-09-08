@@ -9,5 +9,5 @@
         <div class="h-px grow bg-neutral-200"></div>
     </div>
 @else
-    <hr {{ $attributes->class(['border-neutral-200']) }}>
+    <hr {{ $attributes->class(['my-2 border-neutral-200']) }}>
 @endif

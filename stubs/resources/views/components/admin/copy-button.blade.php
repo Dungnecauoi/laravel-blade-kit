@@ -3,7 +3,7 @@
 <button
     type="button"
     x-data="{ copied: false }"
-    @click="navigator.clipboard.writeText(@js($value)); copied = true; setTimeout(() => copied = false, 1500)"
+    @click="navigator.clipboard.writeText(@js($value)).then(() => { copied = true; setTimeout(() => copied = false, 1500); }).catch(() => {})"
     {{ $attributes->class(['inline-flex items-center gap-x-1.5 text-sm text-neutral-500 hover:text-neutral-700']) }}
 >
     <template x-if="! copied">
