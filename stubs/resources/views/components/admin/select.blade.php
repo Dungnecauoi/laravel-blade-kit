@@ -28,19 +28,25 @@
         <x-admin.label :for="$name" :required="$required">{{ $label }}</x-admin.label>
     @endif
 
-    <select
-        name="{{ $name }}"
-        id="{{ $name }}"
-        {{ $attributes->except('value')->class(["block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}"]) }}
-    >
-        @if($placeholder)
-            <option value="" disabled @selected($selected === null)>{{ $placeholder }}</option>
-        @endif
+    <div class="relative">
+        <select
+            name="{{ $name }}"
+            id="{{ $name }}"
+            {{ $attributes->except('value')->class(["block w-full appearance-none rounded-md border-0 py-1.5 pl-3 pr-9 text-neutral-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}"]) }}
+        >
+            @if($placeholder)
+                <option value="" disabled @selected($selected === null)>{{ $placeholder }}</option>
+            @endif
 
-        @foreach($options as $optionValue => $optionLabel)
-            <option value="{{ $optionValue }}" @selected((string) $selected === (string) $optionValue)>{{ $optionLabel }}</option>
-        @endforeach
-    </select>
+            @foreach($options as $optionValue => $optionLabel)
+                <option value="{{ $optionValue }}" @selected((string) $selected === (string) $optionValue)>{{ $optionLabel }}</option>
+            @endforeach
+        </select>
+
+        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+            <x-admin.icon name="chevron-up-down" class="h-4 w-4 text-neutral-400" />
+        </span>
+    </div>
 
     @if($error)
         <p class="mt-1 text-sm text-danger-600">{{ $error }}</p>

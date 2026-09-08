@@ -281,7 +281,7 @@
         :subtitle="__('Sắp xếp qua query string (?sort=&direction=), chọn nhiều dòng bằng Alpine x-model')"
         :padding="false"
     >
-        <div x-data="{ selected: [] }">
+        <div x-data="{ selected: [], allIds: @js(collect($demoRows)->pluck('id')) }">
             <div class="px-5 pt-5" x-show="selected.length > 0" x-cloak>
                 <x-admin.bulk-actions-bar>
                     <x-admin.button size="sm" variant="secondary">{{ __('Xuất file') }}</x-admin.button>
@@ -297,7 +297,7 @@
                                 name="select_all_demo"
                                 :checked="false"
                                 x-bind:checked="selected.length === {{ count($demoRows) }}"
-                                @change="selected = $event.target.checked ? @js(collect($demoRows)->pluck('id')) : []"
+                                @change="selected = $event.target.checked ? allIds : []"
                             />
                         </th>
                         <th class="px-4 py-3"><x-admin.sortable-header field="name" :label="__('Tên')" /></th>

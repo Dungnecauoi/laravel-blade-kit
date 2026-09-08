@@ -27,25 +27,35 @@
         <div class="flex flex-wrap items-center gap-2">
             <span class="w-10 shrink-0 text-xs font-medium text-neutral-400" x-text="index === 0 ? '{{ __('Khi') }}' : '{{ __('Và') }}'"></span>
 
-            <select
-                x-model="row.field"
-                :name="`{{ $name }}[${index}][field]`"
-                class="rounded-md border-0 bg-white py-1.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
-            >
-                <template x-for="field in fields" :key="field.value">
-                    <option :value="field.value" x-text="field.label"></option>
-                </template>
-            </select>
+            <div class="relative">
+                <select
+                    x-model="row.field"
+                    :name="`{{ $name }}[${index}][field]`"
+                    class="appearance-none rounded-md border-0 bg-white py-1.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                >
+                    <template x-for="field in fields" :key="field.value">
+                        <option :value="field.value" x-text="field.label"></option>
+                    </template>
+                </select>
+                <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <x-admin.icon name="chevron-up-down" class="h-4 w-4 text-neutral-400" />
+                </span>
+            </div>
 
-            <select
-                x-model="row.operator"
-                :name="`{{ $name }}[${index}][operator]`"
-                class="rounded-md border-0 bg-white py-1.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
-            >
-                <template x-for="operator in operators" :key="operator.value">
-                    <option :value="operator.value" x-text="operator.label"></option>
-                </template>
-            </select>
+            <div class="relative">
+                <select
+                    x-model="row.operator"
+                    :name="`{{ $name }}[${index}][operator]`"
+                    class="appearance-none rounded-md border-0 bg-white py-1.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                >
+                    <template x-for="operator in operators" :key="operator.value">
+                        <option :value="operator.value" x-text="operator.label"></option>
+                    </template>
+                </select>
+                <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <x-admin.icon name="chevron-up-down" class="h-4 w-4 text-neutral-400" />
+                </span>
+            </div>
 
             <input
                 type="text"

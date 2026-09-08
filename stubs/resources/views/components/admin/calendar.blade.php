@@ -1,7 +1,8 @@
-@props(['events' => []])
+@props(['events' => [], 'name' => null, 'value' => null, 'selectable' => true])
 
 @php
     $locale = app()->getLocale() === 'vi' ? 'vi-VN' : 'en-US';
+    $selected = $name ? old($name, $attributes->get('value', $value)) : $value;
 
     $eventColorClasses = [
         'primary' => 'bg-primary-100 text-primary-700',
@@ -18,9 +19,16 @@
 <div
     x-data="{
         viewDate: new Date(),
+        selected: @js($selected),
+        selectable: @js($selectable),
         events: @js($eventsByDate),
         colorClasses: @js($eventColorClasses),
         weekdayLabels: Array.from({ length: 7 }, (_, i) => new Date(2023, 0, i + 1).toLocaleDateString('{{ $locale }}', { weekday: 'short' })),
+        select(cell) {
+            if (! this.selectable) return;
+            this.selected = cell.iso;
+            $dispatch('calendar-select', { date: cell.iso });
+        },
         get monthLabel() {
             return this.viewDate.toLocaleDateString('{{ $locale }}', { month: 'long', year: 'numeric' });
         },
@@ -52,6 +60,10 @@
     }"
     {{ $attributes->class(['rounded-xl bg-white ring-1 ring-neutral-200']) }}
 >
+    @if($name)
+        <input type="hidden" name="{{ $name }}" :value="selected">
+    @endif
+
     <div class="flex items-center justify-between border-b border-neutral-200 px-4 py-3">
         <button type="button" @click="prevMonth()" class="rounded p-1.5 text-neutral-500 hover:bg-neutral-100">
             <span class="sr-only">{{ __('Tháng trước') }}</span>
@@ -80,12 +92,17 @@
     <div class="grid grid-cols-7">
         <template x-for="cell in cells" :key="cell.iso">
             <div
-                class="min-h-[6rem] border-b border-r border-neutral-100 p-1.5 [&:nth-child(7n)]:border-r-0"
-                :class="! cell.inMonth ? 'bg-neutral-50/60' : ''"
+                @click="select(cell)"
+                class="min-h-[6rem] border-b border-r border-neutral-100 p-1.5 transition-colors [&:nth-child(7n)]:border-r-0"
+                :class="[
+                    ! cell.inMonth ? 'bg-neutral-50/60' : '',
+                    selectable ? 'cursor-pointer hover:bg-neutral-50' : '',
+                    selected === cell.iso ? 'ring-1 ring-inset ring-primary-300 bg-primary-50/40' : '',
+                ]"
             >
                 <span
                     class="flex h-6 w-6 items-center justify-center rounded-full text-xs"
-                    :class="cell.isToday ? 'bg-primary-600 font-semibold text-white' : (cell.inMonth ? 'text-neutral-700' : 'text-neutral-300')"
+                    :class="cell.isToday ? 'bg-primary-600 font-semibold text-white' : (selected === cell.iso ? 'bg-primary-100 font-semibold text-primary-700' : (cell.inMonth ? 'text-neutral-700' : 'text-neutral-300'))"
                     x-text="cell.date.getDate()"
                 ></span>
                 <div class="mt-1 space-y-0.5">
