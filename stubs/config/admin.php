@@ -59,9 +59,19 @@ return [
             ],
         ],
         [
-            'label' => 'Cài đặt hệ thống',
+            'label' => 'Kho hàng',
+            'icon' => 'box',
+            'route' => 'admin.inventory',
+        ],
+        [
+            'label' => 'Đơn hàng',
+            'icon' => 'truck',
+            'route' => 'admin.orders.show',
+        ],
+        [
+            'label' => 'Cài đặt',
             'icon' => 'settings',
-            'url' => '#',
+            'route' => 'admin.settings',
         ],
     ],
 ];

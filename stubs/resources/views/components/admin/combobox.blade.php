@@ -79,6 +79,7 @@
     <button
         type="button"
         id="{{ $name }}"
+        x-ref="trigger"
         @click="open = ! open"
         {{ $attributes->except('value')->class(["relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-neutral-900 shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6 {$ringClass}"]) }}
     >
@@ -108,10 +109,11 @@
     </button>
 
     <div
+        x-anchor.bottom-start.offset.4="$refs.trigger"
         x-show="open"
         x-transition.duration.100ms
         x-cloak
-        class="absolute z-40 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5"
+        class="z-40 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5"
     >
         <div class="px-2 py-1.5">
             <input

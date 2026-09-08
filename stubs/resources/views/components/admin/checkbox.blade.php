@@ -10,8 +10,8 @@
             @checked(old($name, $attributes->get('checked')))
             {{ $attributes->except(['checked', 'value'])->class(['h-4 w-4 rounded border-neutral-300 accent-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-1']) }}
         />
-        @if($label)
-            <label for="{{ $name }}" class="text-sm text-neutral-700 select-none">{{ $label }}</label>
+        @if($label || $slot->isNotEmpty())
+            <label for="{{ $name }}" class="text-sm text-neutral-700 select-none">{{ $label ?? $slot }}</label>
         @endif
     </div>
 

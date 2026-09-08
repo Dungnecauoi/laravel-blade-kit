@@ -4,6 +4,22 @@
         <x-admin.breadcrumb-item current>{{ __('UI Kit') }}</x-admin.breadcrumb-item>
     </x-admin.breadcrumb>
 
+    {{-- Layouts --}}
+    <x-admin.card title="Layouts" :subtitle="__('Mỗi layout là một trang riêng — mở để xem toàn màn hình')">
+        <div class="flex flex-wrap gap-2">
+            <x-admin.button variant="secondary" size="sm" :href="route('auth-demo.login')" target="_blank">x-layouts.auth — {{ __('Đăng nhập') }}</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('auth-demo.register')" target="_blank">x-layouts.auth — {{ __('Đăng ký') }}</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('auth-demo.forgot-password')" target="_blank">x-layouts.auth — {{ __('Quên mật khẩu') }}</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('errors-demo.404')" target="_blank">x-layouts.error — 404</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('errors-demo.403')" target="_blank">x-layouts.error — 403</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('errors-demo.500')" target="_blank">x-layouts.error — 500</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('admin.invoice')" target="_blank">x-layouts.blank — {{ __('Hoá đơn') }}</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('admin.settings')" target="_blank">{{ __('Trang Cài đặt') }}</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('admin.inventory')" target="_blank">{{ __('Trang Kho hàng') }}</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('admin.orders.show')" target="_blank">{{ __('Trang Đơn hàng') }}</x-admin.button>
+        </div>
+    </x-admin.card>
+
     {{-- Buttons --}}
     <x-admin.card title="Buttons" :subtitle="__('Các biến thể và kích thước của x-admin.button')">
         <div class="flex flex-wrap items-center gap-3">
@@ -530,6 +546,206 @@
                     <x-admin.dropdown-link href="#">{{ __('Lưu & tạo mới') }}</x-admin.dropdown-link>
                     <x-admin.dropdown-link href="#">{{ __('Lưu bản nháp') }}</x-admin.dropdown-link>
                 </x-admin.split-button>
+            </div>
+        </div>
+    </x-admin.card>
+
+    {{-- Charts --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Chart — line">
+            <x-admin.chart-line :data="[
+                ['label' => 'T2', 'value' => 12], ['label' => 'T3', 'value' => 19], ['label' => 'T4', 'value' => 14],
+                ['label' => 'T5', 'value' => 27], ['label' => 'T6', 'value' => 22], ['label' => 'T7', 'value' => 31], ['label' => 'CN', 'value' => 25],
+            ]" />
+        </x-admin.card>
+
+        <x-admin.card title="Chart — bar">
+            <x-admin.chart-bar color="success" :data="[
+                ['label' => 'T1', 'value' => 42], ['label' => 'T2', 'value' => 58], ['label' => 'T3', 'value' => 35],
+                ['label' => 'T4', 'value' => 71], ['label' => 'T5', 'value' => 64],
+            ]" />
+        </x-admin.card>
+    </div>
+
+    <x-admin.card title="Chart — donut">
+        <x-admin.chart-donut :label="__('Đơn hàng')" :data="[
+            ['label' => __('Hoàn tất'), 'value' => 62, 'color' => 'success'],
+            ['label' => __('Đang xử lý'), 'value' => 24, 'color' => 'warning'],
+            ['label' => __('Đã huỷ'), 'value' => 8, 'color' => 'danger'],
+        ]" />
+    </x-admin.card>
+
+    {{-- Calendar & Heatmap --}}
+    <x-admin.card title="Calendar">
+        <x-admin.calendar :events="[
+            now()->format('Y-m-d') => [['label' => __('Họp nhóm'), 'color' => 'primary']],
+            now()->addDays(2)->format('Y-m-d') => [['label' => __('Hạn báo cáo'), 'color' => 'danger'], ['label' => __('Gọi khách hàng'), 'color' => 'info']],
+            now()->addDays(5)->format('Y-m-d') => [['label' => __('Ra mắt tính năng'), 'color' => 'success']],
+        ]" />
+    </x-admin.card>
+
+    <x-admin.card title="Heatmap" :subtitle="__('Mật độ hoạt động theo ngày, 12 tuần gần nhất')">
+        <x-admin.heatmap :weeks="12" :data="collect(range(0, 83))->mapWithKeys(fn ($i) => [now()->subDays($i)->format('Y-m-d') => random_int(0, 9)])->all()" />
+    </x-admin.card>
+
+    {{-- Wizard --}}
+    <x-admin.card title="Wizard" :subtitle="__('Form nhiều bước, điều hướng bằng Alpine')">
+        <form action="#" method="POST">
+            @csrf
+            <x-admin.wizard :steps="[__('Thông tin'), __('Địa chỉ'), __('Xác nhận')]">
+                <x-admin.wizard-step :index="1">
+                    <x-admin.input name="wizard_name_demo" :label="__('Họ và tên')" placeholder="Nguyễn Văn A" />
+                </x-admin.wizard-step>
+                <x-admin.wizard-step :index="2">
+                    <x-admin.input name="wizard_address_demo" :label="__('Địa chỉ')" placeholder="12 Nguyễn Huệ, Q.1, TP.HCM" />
+                </x-admin.wizard-step>
+                <x-admin.wizard-step :index="3">
+                    <p class="text-sm text-neutral-600">{{ __('Kiểm tra lại thông tin trước khi hoàn tất.') }}</p>
+                </x-admin.wizard-step>
+            </x-admin.wizard>
+        </form>
+    </x-admin.card>
+
+    {{-- Permission matrix --}}
+    <x-admin.card title="Permission matrix" :subtitle="__('Ma trận quyền hạn theo vai trò, có select-all theo cột')" :padding="false">
+        <x-admin.permission-matrix
+            class="rounded-none ring-0"
+            :roles="[['key' => 'admin', 'label' => __('Quản trị')], ['key' => 'editor', 'label' => __('Biên tập')]]"
+            :permission-groups="[__('Nội dung') => [['key' => 'view', 'label' => __('Xem')], ['key' => 'edit', 'label' => __('Sửa')]]]"
+            :checked="['admin' => ['view', 'edit'], 'editor' => ['view']]"
+        />
+    </x-admin.card>
+
+    {{-- Tag input & Filter builder --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Tag input">
+            <x-admin.tag-input name="tags_demo" :label="__('Từ khoá')" :value="['laravel', 'tailwind']" />
+        </x-admin.card>
+
+        <x-admin.card title="Filter builder">
+            <x-admin.filter-builder :fields="['name' => __('Tên'), 'status' => __('Trạng thái'), 'created_at' => __('Ngày tạo')]" />
+        </x-admin.card>
+    </div>
+
+    {{-- Kanban board --}}
+    <x-admin.card title="Kanban board" :subtitle="__('Kéo thả thẻ giữa các cột (HTML5 drag & drop thuần)')">
+        <x-admin.kanban-board :columns="[
+            ['key' => 'todo', 'label' => __('Cần làm'), 'cards' => [
+                ['id' => 1, 'title' => __('Thiết kế trang đăng nhập'), 'tags' => ['UI'], 'assignee' => 'An'],
+                ['id' => 2, 'title' => __('Viết tài liệu API'), 'tags' => ['Docs'], 'assignee' => 'Bình'],
+            ]],
+            ['key' => 'doing', 'label' => __('Đang làm'), 'cards' => [
+                ['id' => 3, 'title' => __('Tích hợp thanh toán'), 'tags' => ['Backend'], 'assignee' => 'Cường'],
+            ]],
+            ['key' => 'done', 'label' => __('Hoàn tất'), 'cards' => [
+                ['id' => 4, 'title' => __('Cấu hình CI/CD'), 'tags' => ['DevOps'], 'assignee' => 'Dung'],
+            ]],
+        ]" />
+    </x-admin.card>
+
+    {{-- Tree view & File manager --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Tree view">
+            <x-admin.tree-view :items="[
+                ['label' => __('Sản phẩm'), 'icon' => 'folder', 'open' => true, 'children' => [
+                    ['label' => __('Quần áo'), 'icon' => 'folder', 'children' => [
+                        ['label' => __('Áo'), 'icon' => 'circle'],
+                        ['label' => __('Quần'), 'icon' => 'circle'],
+                    ]],
+                    ['label' => __('Phụ kiện'), 'icon' => 'circle'],
+                ]],
+                ['label' => __('Đơn hàng'), 'icon' => 'circle'],
+            ]" />
+        </x-admin.card>
+
+        <x-admin.card title="File manager" :padding="false">
+            <x-admin.file-manager class="ring-0" :files="[
+                ['name' => __('Hợp đồng.pdf'), 'type' => 'document', 'size' => '240 KB', 'updated_at' => '08/09/2026'],
+                ['name' => __('Ảnh bìa.png'), 'type' => 'image', 'size' => '1.1 MB', 'updated_at' => '07/09/2026'],
+                ['name' => __('Lưu trữ'), 'type' => 'folder', 'size' => '—', 'updated_at' => '05/09/2026'],
+                ['name' => __('Sao lưu.zip'), 'type' => 'archive', 'size' => '8.4 MB', 'updated_at' => '01/09/2026'],
+            ]" />
+        </x-admin.card>
+    </div>
+
+    {{-- Context menu & Rich text editor --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Context menu" :subtitle="__('Chuột phải vào khung bên dưới')">
+            <x-admin.context-menu>
+                <x-slot:trigger>
+                    <div class="flex h-24 items-center justify-center rounded-lg border-2 border-dashed border-neutral-200 text-sm text-neutral-400">
+                        {{ __('Chuột phải vào đây') }}
+                    </div>
+                </x-slot:trigger>
+                <x-admin.dropdown-link href="#">{{ __('Sao chép') }}</x-admin.dropdown-link>
+                <x-admin.dropdown-link href="#">{{ __('Đổi tên') }}</x-admin.dropdown-link>
+                <div class="my-1 border-t border-neutral-100"></div>
+                <x-admin.dropdown-link href="#">{{ __('Xoá') }}</x-admin.dropdown-link>
+            </x-admin.context-menu>
+        </x-admin.card>
+
+        <x-admin.card title="Color picker">
+            <div class="max-w-xs">
+                <x-admin.color-picker name="brand_color_demo" :label="__('Màu thương hiệu')" value="#4f46e5" />
+            </div>
+        </x-admin.card>
+    </div>
+
+    {{-- Rich text editor --}}
+    <x-admin.card title="Rich text editor">
+        <x-admin.rich-text-editor name="content_demo" :label="__('Nội dung')" value="<p>Xin chào, đây là <strong>trình soạn thảo</strong> nhẹ dùng contenteditable.</p>" />
+    </x-admin.card>
+
+    {{-- Ecommerce & Kho hàng --}}
+    <x-admin.card title="Ecommerce & Kho hàng" :subtitle="__('Xem thêm ví dụ đầy đủ ở trang Kho hàng và trang Đơn hàng phía trên')">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div class="space-y-6">
+                <div>
+                    <p class="mb-2 text-sm text-neutral-500">Stock badge</p>
+                    <div class="flex flex-wrap gap-2">
+                        <x-admin.stock-badge :quantity="42" />
+                        <x-admin.stock-badge :quantity="4" :threshold="5" />
+                        <x-admin.stock-badge :quantity="0" />
+                    </div>
+                </div>
+
+                <div>
+                    <p class="mb-2 text-sm text-neutral-500">Price tag</p>
+                    <x-admin.price-tag :price="199000" :compare-at="259000" />
+                </div>
+
+                <div>
+                    <p class="mb-2 text-sm text-neutral-500">Payment method badge</p>
+                    <div class="flex flex-wrap gap-2">
+                        <x-admin.payment-method-badge method="cod" />
+                        <x-admin.payment-method-badge method="bank_transfer" />
+                        <x-admin.payment-method-badge method="card" />
+                    </div>
+                </div>
+
+                <div>
+                    <p class="mb-2 text-sm text-neutral-500">Variant selector</p>
+                    <x-admin.variant-selector
+                        :colors="[['label' => __('Đen'), 'hex' => '#111827'], ['label' => __('Trắng'), 'hex' => '#f9fafb'], ['label' => __('Đỏ'), 'hex' => '#dc2626']]"
+                        :sizes="['S', 'M', 'L', 'XL']"
+                    />
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <p class="mb-2 text-sm text-neutral-500">Product card</p>
+                    <div class="max-w-[14rem]">
+                        <x-admin.product-card :name="__('Áo thun basic')" :price="199000" :compare-at="259000" :quantity="42" />
+                    </div>
+                </div>
+
+                <div>
+                    <p class="mb-2 text-sm text-neutral-500">Product gallery</p>
+                    <div class="max-w-[14rem]">
+                        <x-admin.product-gallery :images="[]" />
+                    </div>
+                </div>
             </div>
         </div>
     </x-admin.card>

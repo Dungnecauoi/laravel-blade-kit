@@ -6,17 +6,22 @@ Unlike most component libraries, Blade Kit doesn't hide behind a package namespa
 
 ## What's included
 
-65 components:
+90+ components across 4 layouts:
 
-- **Layout**: `<x-layouts.admin>` — sidebar, navbar, command palette, toast container.
+- **Layouts**: `<x-layouts.admin>` (sidebar, navbar, command palette, toast container), `<x-layouts.auth>` (centered card — login/register/forgot-password), `<x-layouts.blank>` (chrome-free — print/standalone pages), `<x-layouts.error>` (404/403/500).
 - **Navigation**: config-driven sidebar menu (`config/admin.php` + `MenuService`), breadcrumbs, command palette (⌘K).
-- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload.
+- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, color picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload, tag input, rich text editor, filter builder, multi-step wizard.
 - **Feedback**: alert, toast, empty-state, skeleton, progress bar, spinner.
-- **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, avatar group, stat-card, accordion, timeline, stepper, description list, list group, kbd.
+- **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, avatar group, stat-card, accordion, timeline, stepper, description list, list group, kbd, tree view, permission matrix.
+- **Charts & scheduling**: line/bar/donut charts (pure SVG, no chart library), calendar, activity heatmap.
+- **Dashboards & organization**: kanban board (drag & drop), file manager, context menu.
+- **Ecommerce & inventory**: stock badge, inventory table, stock-history log, product card, price tag, variant selector, product gallery, order timeline, order summary, payment method badge, invoice (printable).
 - **Overlays**: modal, drawer (slide-over), dropdown, tooltip.
 - **Actions**: button, split button, confirm-action (delete confirm + real form submit), copy-to-clipboard.
 - **i18n**: every string wrapped in `__()`, Vietnamese as the source language, `lang/en.json` for English — add more locales the same way.
 - **Design tokens**: one `@theme` block (`resources/css/blade-kit.css`) mapping semantic names (`primary`, `neutral`, `danger`, `success`, `warning`, `info`) to Tailwind palettes. Re-skin the whole kit by editing 5 color scales in one file — no Blade file ever needs to change.
+
+Demo pages ship for every layout — `/auth-demo/{login,register,forgot-password}`, `/errors-demo/{404,403,500}`, plus `/admin/{settings,inventory,orders/1082,invoice}` — wired into `routes/admin.php` for reference. The auth pages are UI only (no session/auth logic); wire them to your own auth flow or Breeze/Fortify.
 
 Run `php artisan blade-kit:list` any time to see the full, current list.
 
@@ -52,7 +57,7 @@ Visit `/admin/dashboard` and `/admin/ui-kit` (the second is a living catalogue o
 
 ## Installing only what you need
 
-A small project doesn't need all 65 components sitting in `resources/views/components/admin`. Add one at a time — the installer scans each component's own source for `<x-admin.xxx>` references and pulls in whatever it depends on automatically:
+A small project doesn't need all 90+ components sitting in `resources/views/components/admin`. Add one at a time — the installer scans each component's own source for `<x-admin.xxx>` references and pulls in whatever it depends on automatically:
 
 ```bash
 php artisan blade-kit:list                    # see every available component
