@@ -8,7 +8,8 @@ Unlike most component libraries, Blade Kit doesn't hide behind a package namespa
 
 90+ components across 4 layouts:
 
-- **Layouts**: `<x-layouts.admin>` (sidebar, navbar, command palette, toast container), `<x-layouts.auth>` (centered card — login/register/forgot-password), `<x-layouts.blank>` (chrome-free — print/standalone pages), `<x-layouts.error>` (404/403/500).
+- **Layouts**: `<x-layouts.admin>` (sidebar, navbar, command palette, toast container), `<x-layouts.auth>` (centered card — login/register/forgot-password), `<x-layouts.blank>` (chrome-free — print/standalone pages), `<x-layouts.error>` (404/403/500), `<x-layouts.guest>` (public nav + mobile menu, no sidebar — landing/marketing pages).
+- **Marketing / landing page**: hero, feature grid, pricing plan, testimonial, CTA section, stats strip, footer — see `/landing` for all of them composed into one page.
 - **Navigation**: config-driven sidebar menu (`config/admin.php` + `MenuService`), breadcrumbs, command palette (⌘K). Sidebar collapses to icon-only on desktop (state remembered via `@alpinejs/persist`) and ships in `dark` (default) or `light` (`ADMIN_SIDEBAR_VARIANT=light`) variants. Dropdown/combobox/date-picker popups reposition automatically near screen edges via `@alpinejs/anchor` (Floating UI).
 - **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, date range picker, time picker, color picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload, tag input, rich text editor (TipTap-powered — bold/italic/underline/lists/blockquote/links, with an undo/redo history), filter builder, multi-step wizard.
 - **Feedback**: alert, banner (dismissible announcement bar), toast, empty-state, skeleton, progress bar, spinner.
