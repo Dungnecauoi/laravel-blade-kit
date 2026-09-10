@@ -749,4 +749,34 @@
             </div>
         </div>
     </x-admin.card>
+
+    {{-- Popover, Button group, Lightbox --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Popover">
+            <x-admin.popover title="{{ __('Thông tin') }}">
+                <x-slot:trigger>
+                    <x-admin.button variant="secondary">{{ __('Bấm để xem') }}</x-admin.button>
+                </x-slot:trigger>
+                {{ __('Đây là nội dung popover — có thể chứa văn bản dài, link hoặc bất kỳ nội dung nào khác.') }}
+            </x-admin.popover>
+        </x-admin.card>
+
+        <x-admin.card title="Button group">
+            <x-admin.button-group>
+                <x-admin.button variant="secondary">{{ __('Ngày') }}</x-admin.button>
+                <x-admin.button variant="secondary">{{ __('Tuần') }}</x-admin.button>
+                <x-admin.button variant="secondary">{{ __('Tháng') }}</x-admin.button>
+            </x-admin.button-group>
+        </x-admin.card>
+    </div>
+
+    @php
+        $lightboxDemoImages = collect(['4f46e5', '0891b2', '16a34a', 'ea580c'])->map(
+            fn ($color) => 'data:image/svg+xml,'.rawurlencode("<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><rect width='600' height='600' fill='#{$color}'/></svg>")
+        )->all();
+    @endphp
+
+    <x-admin.card title="Lightbox" :subtitle="__('Bấm vào ảnh để xem toàn màn hình, dùng phím mũi tên để chuyển ảnh')">
+        <x-admin.lightbox :images="$lightboxDemoImages" class="max-w-xl" />
+    </x-admin.card>
 </x-layouts.admin>
