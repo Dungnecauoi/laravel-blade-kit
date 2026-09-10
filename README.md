@@ -11,10 +11,10 @@ Unlike most component libraries, Blade Kit doesn't hide behind a package namespa
 - **Layouts**: `<x-layouts.admin>` (sidebar, navbar, command palette, toast container), `<x-layouts.auth>` (centered card — login/register/forgot-password), `<x-layouts.blank>` (chrome-free — print/standalone pages), `<x-layouts.error>` (404/403/500).
 - **Navigation**: config-driven sidebar menu (`config/admin.php` + `MenuService`), breadcrumbs, command palette (⌘K). Sidebar collapses to icon-only on desktop (state remembered via `@alpinejs/persist`) and ships in `dark` (default) or `light` (`ADMIN_SIDEBAR_VARIANT=light`) variants. Dropdown/combobox/date-picker popups reposition automatically near screen edges via `@alpinejs/anchor` (Floating UI).
 - **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, date range picker, time picker, color picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload, tag input, rich text editor (TipTap-powered — bold/italic/underline/lists/blockquote/links, with an undo/redo history), filter builder, multi-step wizard.
-- **Feedback**: alert, toast, empty-state, skeleton, progress bar, spinner.
+- **Feedback**: alert, banner (dismissible announcement bar), toast, empty-state, skeleton, progress bar, spinner.
 - **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, avatar group, stat-card, accordion, timeline, stepper, description list, list group, kbd, tree view, permission matrix.
 - **Charts & scheduling**: line/bar/donut charts (pure SVG, no chart library), calendar, activity heatmap.
-- **Dashboards & organization**: kanban board (drag & drop), file manager, context menu.
+- **Dashboards & organization**: kanban board (drag & drop), file manager, context menu, carousel, chat bubble.
 - **Ecommerce & inventory**: stock badge, inventory table, stock-history log, product card, price tag, variant selector, product gallery, order timeline, order summary, payment method badge, invoice (printable).
 - **Overlays**: modal, drawer (slide-over), dropdown, tooltip, popover, lightbox (fullscreen image viewer).
 - **Actions**: button, button group, split button, speed dial (floating action button), confirm-action (delete confirm + real form submit), copy-to-clipboard.
