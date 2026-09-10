@@ -9,6 +9,9 @@ Route::redirect('/', '/admin/dashboard');
 
 Route::get('locale/{locale}', LocaleController::class)->name('locale');
 
+// Public marketing page demo — uses x-layouts.guest, separate from the admin.* group below.
+Route::view('landing', 'admin.landing')->name('landing');
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::get('ui-kit', UiKitController::class)->name('ui-kit');

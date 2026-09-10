@@ -17,6 +17,7 @@
             <x-admin.button variant="secondary" size="sm" :href="route('admin.settings')" target="_blank">{{ __('Trang Cài đặt') }}</x-admin.button>
             <x-admin.button variant="secondary" size="sm" :href="route('admin.inventory')" target="_blank">{{ __('Trang Kho hàng') }}</x-admin.button>
             <x-admin.button variant="secondary" size="sm" :href="route('admin.orders.show')" target="_blank">{{ __('Trang Đơn hàng') }}</x-admin.button>
+            <x-admin.button variant="secondary" size="sm" :href="route('landing')" target="_blank">x-layouts.guest — {{ __('Trang chủ') }}</x-admin.button>
         </div>
     </x-admin.card>
 
@@ -818,6 +819,65 @@
     {{-- Carousel --}}
     <x-admin.card title="Carousel" :padding="false">
         <x-admin.carousel :images="$lightboxDemoImages" class="rounded-b-xl rounded-t-none" />
+    </x-admin.card>
+
+    {{-- Marketing / landing page blocks --}}
+    <x-admin.card title="Marketing blocks" :subtitle="__('Hero, feature grid, pricing, testimonial, CTA, footer — xem đầy đủ ở trang chủ liên kết trong mục Layouts phía trên')">
+        <div class="space-y-8">
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Feature item</p>
+                <x-admin.feature-grid columns="3">
+                    <x-admin.feature-item icon="puzzle" :title="__('90+ component')">
+                        {{ __('Đủ cho một hệ thống quản trị thật.') }}
+                    </x-admin.feature-item>
+                    <x-admin.feature-item icon="settings" :title="__('Tuỳ biến hoàn toàn')">
+                        {{ __('Mọi component là file Blade thật trong project của bạn.') }}
+                    </x-admin.feature-item>
+                    <x-admin.feature-item icon="check-circle" :title="__('Sẵn sàng production')">
+                        {{ __('i18n, responsive, đã kiểm thử kỹ.') }}
+                    </x-admin.feature-item>
+                </x-admin.feature-grid>
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Pricing plan</p>
+                <div class="max-w-xs">
+                    <x-admin.pricing-plan
+                        :name="__('Chuyên nghiệp')"
+                        price="990.000₫"
+                        period="{{ __('năm') }}"
+                        :highlighted="true"
+                        :features="[__('Toàn bộ component'), __('Hỗ trợ qua email')]"
+                    />
+                </div>
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Testimonial</p>
+                <div class="max-w-sm">
+                    <x-admin.testimonial :quote="__('Tiết kiệm cả tuần dựng UI cho team mình.')" name="Nguyễn Văn An" :role="__('CTO')" />
+                </div>
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">CTA section</p>
+                <x-admin.cta-section :title="__('Sẵn sàng bắt đầu?')" :description="__('Cài đặt trong vài phút.')">
+                    <x-slot:actions>
+                        <x-admin.button variant="secondary">{{ __('Dùng thử') }}</x-admin.button>
+                    </x-slot:actions>
+                </x-admin.cta-section>
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Stats strip</p>
+                <x-admin.stats-strip :stats="[
+                    ['value' => '10K+', 'label' => __('Người dùng')],
+                    ['value' => '99.9%', 'label' => __('Uptime')],
+                    ['value' => '90+', 'label' => __('Component')],
+                    ['value' => '24/7', 'label' => __('Hỗ trợ')],
+                ]" />
+            </div>
+        </div>
     </x-admin.card>
 
     {{-- Speed dial --}}
