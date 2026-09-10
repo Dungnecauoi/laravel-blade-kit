@@ -86,3 +86,12 @@
 [x-cloak] {
     display: none !important;
 }
+
+/* <x-admin.rich-text-editor> — TipTap/ProseMirror's own placeholder text needs real CSS, not a Tailwind utility. */
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    color: var(--color-neutral-400);
+    pointer-events: none;
+}

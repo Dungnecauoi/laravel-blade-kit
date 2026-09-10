@@ -693,7 +693,7 @@
 
     {{-- Rich text editor --}}
     <x-admin.card title="Rich text editor">
-        <x-admin.rich-text-editor name="content_demo" :label="__('Nội dung')" value="<p>Xin chào, đây là <strong>trình soạn thảo</strong> nhẹ dùng contenteditable.</p>" />
+        <x-admin.rich-text-editor name="content_demo" :label="__('Nội dung')" :placeholder="__('Nhập nội dung...')" value="<p>Xin chào, đây là <strong>trình soạn thảo</strong> dùng TipTap — thử bôi đen chữ rồi bấm <em>in nghiêng</em>.</p>" />
     </x-admin.card>
 
     {{-- Ecommerce & Kho hàng --}}
