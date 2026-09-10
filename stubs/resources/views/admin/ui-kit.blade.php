@@ -877,7 +877,61 @@
                     ['value' => '24/7', 'label' => __('Hỗ trợ')],
                 ]" />
             </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Logo cloud</p>
+                <x-admin.logo-cloud :logos="['ACME Corp', 'Ánh Dương', 'Northwind', 'Globex', 'Initech', 'Umbrella']" />
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Team member</p>
+                <x-admin.feature-grid columns="3" class="max-w-2xl">
+                    <x-admin.team-member name="Nguyễn Văn An" :role="__('Nhà sáng lập')" />
+                    <x-admin.team-member name="Trần Thị Bình" :role="__('Trưởng phòng thiết kế')" />
+                    <x-admin.team-member name="Lê Hoàng Cường" :role="__('Kỹ sư trưởng')" />
+                </x-admin.feature-grid>
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Blog card</p>
+                <div class="max-w-xs">
+                    <x-admin.blog-card
+                        category="{{ __('Cập nhật') }}"
+                        :title="__('Ra mắt bản v2.0 với 30 component mới')"
+                        :excerpt="__('Thêm kanban, biểu đồ, permission matrix và nhiều component ngành thương mại điện tử.')"
+                        author="Nguyễn Văn An"
+                        date="08/09/2026"
+                    />
+                </div>
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Rating summary</p>
+                <x-admin.rating-summary :average="4.6" :total="1284" :breakdown="[5 => 820, 4 => 310, 3 => 90, 2 => 40, 1 => 24]" />
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Comparison table</p>
+                <x-admin.comparison-table
+                    :plans="['Free', 'Pro', 'Doanh nghiệp']"
+                    :features="[
+                        ['label' => __('Số component'), 'values' => ['Free' => '90+', 'Pro' => '90+', 'Doanh nghiệp' => '90+']],
+                        ['label' => __('Hỗ trợ ưu tiên'), 'values' => ['Free' => false, 'Pro' => true, 'Doanh nghiệp' => true]],
+                        ['label' => __('Tư vấn triển khai'), 'values' => ['Free' => false, 'Pro' => false, 'Doanh nghiệp' => true]],
+                    ]"
+                />
+            </div>
+
+            <div>
+                <p class="mb-2 text-sm text-neutral-500">Newsletter</p>
+                <x-admin.newsletter :title="__('Đăng ký nhận tin')" :description="__('Cập nhật tính năng mới sớm nhất.')" />
+            </div>
         </div>
+    </x-admin.card>
+
+    {{-- OTP input --}}
+    <x-admin.card title="OTP input" :subtitle="__('Nhập mã xác thực — tự chuyển ô, hỗ trợ dán mã, Backspace lùi về ô trước')">
+        <x-admin.otp-input name="otp_demo" :label="__('Mã xác thực')" :length="6" />
     </x-admin.card>
 
     {{-- Speed dial --}}

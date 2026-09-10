@@ -30,6 +30,13 @@
         ]" />
     </div>
 
+    <div class="border-y border-neutral-100 bg-neutral-50/60 py-10">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-medium text-neutral-400">{{ __('Được tin dùng bởi') }}</p>
+            <x-admin.logo-cloud class="mt-6" :logos="['ACME Corp', 'Ánh Dương', 'Northwind', 'Globex', 'Initech', 'Umbrella']" />
+        </div>
+    </div>
+
     <div id="features" class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
             <h2 class="text-3xl font-bold tracking-tight text-neutral-900">{{ __('Mọi thứ bạn cần cho một trang quản trị') }}</h2>
@@ -77,6 +84,17 @@
                 :features="[__('Mọi thứ ở gói Chuyên nghiệp'), __('Hỗ trợ trực tiếp'), __('Tư vấn triển khai')]"
             />
         </div>
+
+        <div class="mx-auto mt-12 max-w-3xl">
+            <x-admin.comparison-table
+                :plans="[__('Miễn phí'), __('Chuyên nghiệp'), __('Doanh nghiệp')]"
+                :features="[
+                    ['label' => __('Số component'), 'values' => [__('Miễn phí') => '90+', __('Chuyên nghiệp') => '90+', __('Doanh nghiệp') => '90+']],
+                    ['label' => __('Hỗ trợ qua email'), 'values' => [__('Miễn phí') => false, __('Chuyên nghiệp') => true, __('Doanh nghiệp') => true]],
+                    ['label' => __('Tư vấn triển khai'), 'values' => [__('Miễn phí') => false, __('Chuyên nghiệp') => false, __('Doanh nghiệp') => true]],
+                ]"
+            />
+        </div>
     </div>
 
     <div id="testimonials" class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
@@ -98,6 +116,24 @@
         </div>
     </div>
 
+    <div id="faq" class="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-3xl font-bold tracking-tight text-neutral-900">{{ __('Câu hỏi thường gặp') }}</h2>
+        </div>
+
+        <x-admin.accordion default="faq-landing-1" class="mt-12">
+            <x-admin.accordion-item value="faq-landing-1" :title="__('Có cần trả phí để dùng không?')">
+                {{ __('Không — toàn bộ component mã nguồn mở theo giấy phép MIT, dùng miễn phí cho cả dự án cá nhân lẫn thương mại.') }}
+            </x-admin.accordion-item>
+            <x-admin.accordion-item value="faq-landing-2" :title="__('Có khoá vào một framework JS nặng không?')">
+                {{ __('Không — chỉ dùng Alpine.js, không React/Vue, không build phức tạp.') }}
+            </x-admin.accordion-item>
+            <x-admin.accordion-item value="faq-landing-3" :title="__('Tôi có thể sửa component theo ý mình không?')">
+                {{ __('Có — mỗi component là 1 file Blade thật nằm trong project của bạn, không phải package đóng gói trong vendor.') }}
+            </x-admin.accordion-item>
+        </x-admin.accordion>
+    </div>
+
     <div class="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
         <x-admin.cta-section
             :title="__('Sẵn sàng bắt đầu?')"
@@ -107,6 +143,10 @@
                 <x-admin.button variant="secondary" size="lg" :href="route('auth-demo.register')">{{ __('Dùng thử miễn phí') }}</x-admin.button>
             </x-slot:actions>
         </x-admin.cta-section>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
+        <x-admin.newsletter :title="__('Đăng ký nhận tin')" :description="__('Cập nhật tính năng mới, không spam.')" />
     </div>
 
     <x-admin.footer :columns="[
