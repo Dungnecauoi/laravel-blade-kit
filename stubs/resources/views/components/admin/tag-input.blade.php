@@ -37,7 +37,7 @@
 
     <div
         @click="$refs.input.focus()"
-        {{ $attributes->except('value')->class(["flex flex-wrap items-center gap-1.5 rounded-md bg-white px-2 py-1.5 shadow-sm ring-1 ring-inset focus-within:ring-2 focus-within:ring-primary-600 {$ringClass}"]) }}
+        {{ $attributes->except('value')->class(["flex flex-wrap items-center gap-1.5 rounded-md bg-white px-2.5 py-2 shadow-sm ring-1 ring-inset focus-within:ring-2 focus-within:ring-primary-600 {$ringClass}"]) }}
     >
         <template x-for="(tag, index) in tags" :key="tag">
             <span class="inline-flex items-center gap-x-1 rounded bg-primary-50 py-0.5 pl-2 pr-1 text-xs font-medium text-primary-700">

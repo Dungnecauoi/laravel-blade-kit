@@ -29,7 +29,7 @@
     @endif
 
     <div class="flex rounded-md shadow-sm ring-1 ring-inset focus-within:ring-2 {{ $ringClass }}">
-        <button type="button" @click="dec()" class="flex items-center justify-center rounded-l-md px-3 text-neutral-500 hover:bg-neutral-50" tabindex="-1">
+        <button type="button" @click="dec()" class="flex items-center justify-center rounded-l-md px-3 py-2.5 text-neutral-500 hover:bg-neutral-50" tabindex="-1">
             <span class="sr-only">{{ __('Giảm') }}</span>
             <x-admin.icon name="minus" class="h-4 w-4" />
         </button>
@@ -42,10 +42,10 @@
             @if($min !== null) min="{{ $min }}" @endif
             @if($max !== null) max="{{ $max }}" @endif
             step="{{ $step }}"
-            {{ $attributes->except('value')->class(['w-full border-0 bg-transparent text-center text-sm text-neutral-900 focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none']) }}
+            {{ $attributes->except('value')->class(['w-full border-0 bg-transparent py-2.5 text-center text-sm text-neutral-900 focus:outline-none focus:ring-0 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none']) }}
         />
 
-        <button type="button" @click="inc()" class="flex items-center justify-center rounded-r-md px-3 text-neutral-500 hover:bg-neutral-50" tabindex="-1">
+        <button type="button" @click="inc()" class="flex items-center justify-center rounded-r-md px-3 py-2.5 text-neutral-500 hover:bg-neutral-50" tabindex="-1">
             <span class="sr-only">{{ __('Tăng') }}</span>
             <x-admin.icon name="plus" class="h-4 w-4" />
         </button>

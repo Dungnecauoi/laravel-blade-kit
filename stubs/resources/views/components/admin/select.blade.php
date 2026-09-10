@@ -32,7 +32,7 @@
         <select
             name="{{ $name }}"
             id="{{ $name }}"
-            {{ $attributes->except('value')->class(["block w-full appearance-none rounded-md border-0 py-1.5 pl-3 pr-9 text-neutral-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}"]) }}
+            {{ $attributes->except('value')->class(["block w-full appearance-none rounded-md border-0 py-2.5 pl-3 pr-9 text-neutral-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}"]) }}
         >
             @if($placeholder)
                 <option value="" disabled @selected($selected === null)>{{ $placeholder }}</option>

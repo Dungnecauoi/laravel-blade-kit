@@ -29,7 +29,7 @@
         type="button"
         id="{{ $name }}"
         @click="open = ! open"
-        {{ $attributes->except('value')->class(["flex w-full items-center gap-x-2 rounded-md bg-white py-1.5 pl-2.5 pr-3 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-primary-600 sm:text-sm {$ringClass}"]) }}
+        {{ $attributes->except('value')->class(["flex w-full items-center gap-x-2 rounded-md bg-white py-2.5 pl-2.5 pr-3 text-left shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-primary-600 sm:text-sm {$ringClass}"]) }}
     >
         <span class="h-5 w-5 shrink-0 rounded-full ring-1 ring-inset ring-black/10" :style="`background-color: ${selected || '#e5e7eb'}`"></span>
         <span class="flex-1 truncate text-neutral-900" x-text="selected || @js(__('Chọn màu'))" :class="{ 'text-neutral-400': ! selected }"></span>

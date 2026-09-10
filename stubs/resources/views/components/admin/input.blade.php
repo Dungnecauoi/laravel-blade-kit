@@ -62,7 +62,7 @@
                 id="{{ $name }}"
                 x-model="value"
                 {{ $attributes->except('value')->class([
-                    "block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}",
+                    "block w-full rounded-md border-0 px-3 py-2.5 text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}",
                     'pl-9' => $hasLeftIcon,
                     'pr-9' => $hasRightSlot,
                     'rounded-l-none' => $addonBefore,

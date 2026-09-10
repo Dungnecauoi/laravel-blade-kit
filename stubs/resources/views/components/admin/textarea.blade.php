@@ -38,7 +38,7 @@
             @input="$el.style.height = 'auto'; $el.style.height = $el.scrollHeight + 'px'"
             style="overflow: hidden; resize: none;"
         @endif
-        {{ $attributes->except('value')->class(["block w-full rounded-md border-0 py-1.5 text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}"]) }}
+        {{ $attributes->except('value')->class(["block w-full rounded-md border-0 px-3 py-2.5 text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 {$variantClass}"]) }}
     >{{ $value }}</textarea>
 
     @if($error)

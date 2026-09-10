@@ -10,7 +10,7 @@
         name="{{ $name }}"
         x-model="value"
         placeholder="{{ $placeholder ?? __('Tìm kiếm...') }}"
-        {{ $attributes->except('value')->class(['block w-full rounded-md border-0 py-1.5 pl-9 pr-9 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6']) }}
+        {{ $attributes->except('value')->class(['block w-full rounded-md border-0 py-2.5 pl-9 pr-9 text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6']) }}
     />
 
     <button type="button" x-show="value" x-cloak @click="value = ''" class="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-400 hover:text-neutral-600" tabindex="-1">

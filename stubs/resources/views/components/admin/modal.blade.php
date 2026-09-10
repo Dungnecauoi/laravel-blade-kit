@@ -32,7 +32,11 @@
                 @if($title)
                     <div class="flex items-center justify-between border-b border-neutral-200 px-5 py-4">
                         <h3 class="text-base font-semibold text-neutral-900">{{ $title }}</h3>
-                        <button type="button" @click="open = false" class="text-neutral-400 hover:text-neutral-600">
+                        <button
+                            type="button"
+                            @click="open = false"
+                            class="-mr-2 inline-flex h-9 w-9 items-center justify-center rounded-md text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600"
+                        >
                             <span class="sr-only">{{ __('Đóng') }}</span>
                             <x-admin.icon name="x-mark" class="h-5 w-5" />
                         </button>

@@ -81,7 +81,7 @@
         id="{{ $name }}"
         x-ref="trigger"
         @click="open = ! open"
-        {{ $attributes->except('value')->class(["relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-neutral-900 shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6 {$ringClass}"]) }}
+        {{ $attributes->except('value')->class(["relative w-full cursor-default rounded-md bg-white py-2.5 pl-3 pr-10 text-left text-neutral-900 shadow-sm ring-1 ring-inset focus:outline-none focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6 {$ringClass}"]) }}
     >
         <template x-if="! multiple">
             <span class="block truncate" :class="{ 'text-neutral-400': ! selectedLabel }" x-text="selectedLabel || @js($placeholder ?? '')"></span>

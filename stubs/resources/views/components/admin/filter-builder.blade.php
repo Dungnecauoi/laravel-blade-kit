@@ -31,7 +31,7 @@
                 <select
                     x-model="row.field"
                     :name="`{{ $name }}[${index}][field]`"
-                    class="appearance-none rounded-md border-0 bg-white py-1.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    class="appearance-none rounded-md border-0 bg-white py-2.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
                 >
                     <template x-for="field in fields" :key="field.value">
                         <option :value="field.value" x-text="field.label"></option>
@@ -46,7 +46,7 @@
                 <select
                     x-model="row.operator"
                     :name="`{{ $name }}[${index}][operator]`"
-                    class="appearance-none rounded-md border-0 bg-white py-1.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    class="appearance-none rounded-md border-0 bg-white py-2.5 pl-3 pr-8 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
                 >
                     <template x-for="operator in operators" :key="operator.value">
                         <option :value="operator.value" x-text="operator.label"></option>
@@ -62,7 +62,7 @@
                 x-model="row.value"
                 :name="`{{ $name }}[${index}][value]`"
                 placeholder="{{ __('Giá trị') }}"
-                class="min-w-0 flex-1 rounded-md border-0 bg-white px-3 py-1.5 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                class="min-w-0 flex-1 rounded-md border-0 bg-white px-3 py-2.5 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
             >
 
             <button

@@ -28,7 +28,7 @@
                 }"
             ></span>
             <p class="flex-1 text-sm text-neutral-700" x-text="toast.message"></p>
-            <button type="button" class="text-neutral-400 hover:text-neutral-600" @click="toasts = toasts.filter(t => t.id !== toast.id)">
+            <button type="button" class="-m-1 shrink-0 rounded p-1 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600" @click="toasts = toasts.filter(t => t.id !== toast.id)">
                 <span class="sr-only">{{ __('Đóng') }}</span>
                 <x-admin.icon name="x-mark" class="h-4 w-4" />
             </button>

@@ -32,7 +32,7 @@
                 type="text"
                 x-model="query"
                 placeholder="{{ __('Tìm kiếm file...') }}"
-                class="block w-full rounded-md border-0 py-1.5 pl-9 pr-3 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                class="block w-full rounded-md border-0 py-2.5 pl-9 pr-3 text-sm text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
             >
         </div>
 
