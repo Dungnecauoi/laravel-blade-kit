@@ -793,6 +793,33 @@
         <x-admin.lightbox :images="$lightboxDemoImages" class="max-w-xl" />
     </x-admin.card>
 
+    {{-- Banner --}}
+    <x-admin.card title="Banner" :padding="false">
+        <x-admin.banner class="rounded-b-xl">
+            {{ __('Phiên bản mới đã có mặt!') }}
+            <x-slot:action>
+                <x-admin.button size="sm" variant="secondary">{{ __('Xem chi tiết') }}</x-admin.button>
+            </x-slot:action>
+        </x-admin.banner>
+    </x-admin.card>
+
+    {{-- Chat bubble --}}
+    <x-admin.card title="Chat bubble">
+        <div class="space-y-4">
+            <x-admin.chat-bubble name="Trần Thị Bình" time="10:42">
+                {{ __('Chào bạn, đơn hàng #1082 đã được duyệt chưa nhỉ?') }}
+            </x-admin.chat-bubble>
+            <x-admin.chat-bubble :own="true" time="10:43" status="{{ __('Đã xem') }}">
+                {{ __('Rồi nhé, đang chuẩn bị giao trong hôm nay.') }}
+            </x-admin.chat-bubble>
+        </div>
+    </x-admin.card>
+
+    {{-- Carousel --}}
+    <x-admin.card title="Carousel" :padding="false">
+        <x-admin.carousel :images="$lightboxDemoImages" class="rounded-b-xl rounded-t-none" />
+    </x-admin.card>
+
     {{-- Speed dial --}}
     <x-admin.card title="Speed dial" :subtitle="__('Nút hành động nhanh — luôn nổi ở góc phải dưới màn hình')">
         <p class="text-sm text-neutral-500">{{ __('Xem ở góc phải dưới màn hình.') }}</p>
