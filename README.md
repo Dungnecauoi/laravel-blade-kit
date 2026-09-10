@@ -17,8 +17,9 @@ Unlike most component libraries, Blade Kit doesn't hide behind a package namespa
 - **Charts & scheduling**: line/bar/donut charts (pure SVG, no chart library), calendar, activity heatmap.
 - **Dashboards & organization**: kanban board (drag & drop), file manager, context menu, carousel, chat bubble.
 - **Ecommerce & inventory**: stock badge, inventory table, stock-history log, product card, price tag, variant selector, product gallery, order timeline, order summary, payment method badge, invoice (printable).
-- **Overlays**: modal, drawer (slide-over), dropdown, tooltip, popover, lightbox (fullscreen image viewer).
-- **Actions**: button, button group, split button, speed dial (floating action button), confirm-action (delete confirm + real form submit), copy-to-clipboard.
+- **Overlays**: modal, drawer (slide-over), dropdown, tooltip, popover, popconfirm (lightweight inline confirm), lightbox (fullscreen image viewer).
+- **Actions**: button, button group, split button, speed dial (floating action button), confirm-action (delete confirm + real form submit), copy-to-clipboard, back-to-top.
+- **Enterprise/AntD-style**: result (success/error/warning/info block), page header (back link + title + actions), cascader (multi-level hierarchical select).
 - **i18n**: every string wrapped in `__()`, Vietnamese as the source language, `lang/en.json` for English — add more locales the same way.
 - **Design tokens**: one `@theme` block (`resources/css/blade-kit.css`) mapping semantic names (`primary`, `neutral`, `danger`, `success`, `warning`, `info`) to Tailwind palettes. Re-skin the whole kit by editing 5 color scales in one file — no Blade file ever needs to change.
 
