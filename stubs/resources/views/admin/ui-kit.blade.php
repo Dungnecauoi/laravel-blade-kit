@@ -934,6 +934,68 @@
         <x-admin.otp-input name="otp_demo" :label="__('Mã xác thực')" :length="6" />
     </x-admin.card>
 
+    {{-- Page header --}}
+    <x-admin.card title="Page header" :padding="false">
+        <x-admin.page-header
+            :title="__('Chi tiết đơn hàng #1082')"
+            :description="__('Tạo lúc 09:12 · 08/09/2026')"
+            back="#"
+            class="p-5"
+        >
+            <x-slot:actions>
+                <x-admin.button variant="secondary" size="sm">{{ __('In hoá đơn') }}</x-admin.button>
+                <x-admin.button variant="primary" size="sm">{{ __('Cập nhật trạng thái') }}</x-admin.button>
+            </x-slot:actions>
+        </x-admin.page-header>
+    </x-admin.card>
+
+    {{-- Popconfirm & Cascader --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Popconfirm" :subtitle="__('Xác nhận nhẹ dạng popover — khác với Confirm action (mở modal to)')">
+            <x-admin.popconfirm :message="__('Bạn có chắc muốn xoá mục này?')">
+                <x-slot:trigger>
+                    <x-admin.button variant="danger" size="sm">{{ __('Xoá') }}</x-admin.button>
+                </x-slot:trigger>
+            </x-admin.popconfirm>
+        </x-admin.card>
+
+        <x-admin.card title="Cascader">
+            <div class="max-w-xs">
+                <x-admin.cascader
+                    name="location_demo"
+                    :label="__('Khu vực')"
+                    :placeholder="__('Chọn tỉnh / quận / phường')"
+                    :options="[
+                        ['value' => 'hcm', 'label' => 'TP. Hồ Chí Minh', 'children' => [
+                            ['value' => 'q1', 'label' => 'Quận 1', 'children' => [
+                                ['value' => 'bennghe', 'label' => 'Bến Nghé'],
+                                ['value' => 'dakao', 'label' => 'Đa Kao'],
+                            ]],
+                            ['value' => 'q3', 'label' => 'Quận 3'],
+                        ]],
+                        ['value' => 'hn', 'label' => 'Hà Nội', 'children' => [
+                            ['value' => 'hoankiem', 'label' => 'Hoàn Kiếm'],
+                            ['value' => 'badinh', 'label' => 'Ba Đình'],
+                        ]],
+                    ]"
+                />
+            </div>
+        </x-admin.card>
+    </div>
+
+    {{-- Result --}}
+    <x-admin.card title="Result" :padding="false">
+        <x-admin.result status="success" :title="__('Đặt hàng thành công!')" :description="__('Đơn hàng #1082 đã được ghi nhận, chúng tôi sẽ giao trong 2-3 ngày làm việc.')">
+            <x-slot:actions>
+                <x-admin.button variant="secondary" :href="route('admin.dashboard')">{{ __('Về trang chủ') }}</x-admin.button>
+                <x-admin.button variant="primary" :href="route('admin.orders.show')">{{ __('Xem đơn hàng') }}</x-admin.button>
+            </x-slot:actions>
+        </x-admin.result>
+    </x-admin.card>
+
+    {{-- positioned to the left so it doesn't overlap the Speed dial demo, which also sits bottom-right --}}
+    <x-admin.back-to-top class="!right-auto !left-6" />
+
     {{-- Speed dial --}}
     <x-admin.card title="Speed dial" :subtitle="__('Nút hành động nhanh — luôn nổi ở góc phải dưới màn hình')">
         <p class="text-sm text-neutral-500">{{ __('Xem ở góc phải dưới màn hình.') }}</p>
