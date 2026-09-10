@@ -10,7 +10,7 @@ Unlike most component libraries, Blade Kit doesn't hide behind a package namespa
 
 - **Layouts**: `<x-layouts.admin>` (sidebar, navbar, command palette, toast container), `<x-layouts.auth>` (centered card — login/register/forgot-password), `<x-layouts.blank>` (chrome-free — print/standalone pages), `<x-layouts.error>` (404/403/500).
 - **Navigation**: config-driven sidebar menu (`config/admin.php` + `MenuService`), breadcrumbs, command palette (⌘K). Sidebar collapses to icon-only on desktop (state remembered via `@alpinejs/persist`) and ships in `dark` (default) or `light` (`ADMIN_SIDEBAR_VARIANT=light`) variants. Dropdown/combobox/date-picker popups reposition automatically near screen edges via `@alpinejs/anchor` (Floating UI).
-- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, color picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload, tag input, rich text editor, filter builder, multi-step wizard.
+- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, color picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload, tag input, rich text editor (TipTap-powered — bold/italic/underline/lists/blockquote/links, with an undo/redo history), filter builder, multi-step wizard.
 - **Feedback**: alert, toast, empty-state, skeleton, progress bar, spinner.
 - **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, avatar group, stat-card, accordion, timeline, stepper, description list, list group, kbd, tree view, permission matrix.
 - **Charts & scheduling**: line/bar/donut charts (pure SVG, no chart library), calendar, activity heatmap.
@@ -34,7 +34,7 @@ Run `php artisan blade-kit:list` any time to see the full, current list.
 ## Installation
 
 ```bash
-composer require dungnecauoi/laravel-blade-kit
+composer require duxbo/laravel-blade-kit
 php artisan blade-kit:install
 ```
 
@@ -42,6 +42,7 @@ The installer copies files into your app (skipping anything that already exists 
 
 ```bash
 npm install alpinejs @alpinejs/collapse @alpinejs/anchor @alpinejs/persist axios
+npm install @tiptap/core @tiptap/starter-kit @tiptap/extension-placeholder
 ```
 
 Then, by hand:

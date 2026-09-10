@@ -1,12 +1,13 @@
 {
-    "name": "dungnecauoi/laravel-blade-kit",
+    "name": "duxbo/laravel-blade-kit",
     "description": "A lean, self-hosted admin UI kit for Laravel: Blade components (x-component syntax), Tailwind CSS v4 design tokens, and Alpine.js — no Livewire, no black-box package lock-in. Installs by copying real files into your app.",
     "type": "library",
     "license": "MIT",
     "keywords": ["laravel", "blade", "tailwindcss", "alpinejs", "admin", "ui-kit"],
     "authors": [
         {
-            "name": "Dungnecauoi"
+            "name": "duxbo",
+            "email": "dungduc10a8@gmail.com"
         }
     ],
     "require": {
