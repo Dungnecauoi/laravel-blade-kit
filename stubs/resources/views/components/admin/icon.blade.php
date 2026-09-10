@@ -62,6 +62,7 @@
         'wallet' => '<path d="M3 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" /><path d="M16 12h3v3h-3a1.5 1.5 0 0 1 0-3Z" />',
         'list-numbered' => '<text x="1.5" y="8.5" font-size="6" fill="currentColor" stroke="none">1</text><text x="1.5" y="14.5" font-size="6" fill="currentColor" stroke="none">2</text><text x="1.5" y="20.5" font-size="6" fill="currentColor" stroke="none">3</text><line x1="8.5" y1="6" x2="21" y2="6" /><line x1="8.5" y1="12" x2="21" y2="12" /><line x1="8.5" y1="18" x2="21" y2="18" />',
         'quote' => '<path d="M7 7a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v-6H6a2 2 0 0 1 2-2V7Z" fill="currentColor" stroke="none" /><path d="M17 7a3 3 0 0 0-3 3v3a3 3 0 0 0 3 3h1v-6h-2a2 2 0 0 1 2-2V7Z" fill="currentColor" stroke="none" />',
+        'clock' => '<circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" />',
     ];
 
     $svgPath = $paths[$name] ?? $paths['circle'];

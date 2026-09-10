@@ -445,6 +445,19 @@
         </x-admin.card>
     </div>
 
+    {{-- Date range picker & Time picker --}}
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <x-admin.card title="Date range picker">
+            <x-admin.date-range-picker name="range_demo" :label="__('Khoảng thời gian')" />
+        </x-admin.card>
+
+        <x-admin.card title="Time picker">
+            <div class="max-w-xs">
+                <x-admin.time-picker name="time_demo" :label="__('Giờ mở cửa')" value="09:00" />
+            </div>
+        </x-admin.card>
+    </div>
+
     {{-- Toggle group & Rating --}}
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <x-admin.card title="Toggle group">
@@ -779,4 +792,15 @@
     <x-admin.card title="Lightbox" :subtitle="__('Bấm vào ảnh để xem toàn màn hình, dùng phím mũi tên để chuyển ảnh')">
         <x-admin.lightbox :images="$lightboxDemoImages" class="max-w-xl" />
     </x-admin.card>
+
+    {{-- Speed dial --}}
+    <x-admin.card title="Speed dial" :subtitle="__('Nút hành động nhanh — luôn nổi ở góc phải dưới màn hình')">
+        <p class="text-sm text-neutral-500">{{ __('Xem ở góc phải dưới màn hình.') }}</p>
+    </x-admin.card>
+
+    <x-admin.speed-dial>
+        <x-admin.speed-dial-action icon="document" :label="__('Tạo tài liệu')" />
+        <x-admin.speed-dial-action icon="users" :label="__('Mời thành viên')" />
+        <x-admin.speed-dial-action icon="upload" :label="__('Tải file lên')" />
+    </x-admin.speed-dial>
 </x-layouts.admin>
