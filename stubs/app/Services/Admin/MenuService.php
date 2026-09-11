@@ -7,11 +7,17 @@ use Illuminate\Support\Facades\Route;
 
 class MenuService implements MenuServiceInterface
 {
+    public function __construct(
+        private readonly MenuRegistry $registry,
+    ) {}
+
     public function items(): array
     {
+        $items = array_merge(config('admin.menu', []), $this->registry->items());
+
         return array_map(
             fn (array $item) => $this->resolve($item),
-            config('admin.menu', []),
+            $items,
         );
     }
 
@@ -37,9 +43,15 @@ class MenuService implements MenuServiceInterface
 
     private function resolve(array $item): array
     {
+        $children = $item['children'] ?? [];
+
+        if (isset($item['key'])) {
+            $children = array_merge($children, $this->registry->childrenFor($item['key']));
+        }
+
         $children = array_map(
             fn (array $child) => $this->resolve($child),
-            $item['children'] ?? [],
+            $children,
         );
 
         return [

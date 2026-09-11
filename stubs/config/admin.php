@@ -55,27 +55,35 @@ return [
     |--------------------------------------------------------------------------
     |
     | Data-driven navigation tree. Each entry accepts:
+    |   key        string   stable id — lets MenuRegistry::register() target
+    |                        this item as a parent from another package, e.g.
+    |                        app(MenuRegistry::class)->register($item, 'management')
     |   label      string   display text
     |   icon       string   key handled by <x-admin.icon>
     |   route      string   named route, resolved + active-checked by MenuService
     |   url        string   plain fallback link when no route exists yet
     |   children   array    nested items, same shape
     |
-    | Adding/removing menu items never touches Blade files.
+    | Adding/removing menu items never touches Blade files. Packages that
+    | can't edit this file register through MenuRegistry instead — see its
+    | docblock.
     |
     */
     'menu' => [
         [
+            'key' => 'dashboard',
             'label' => 'Tổng quan',
             'icon' => 'home',
             'route' => 'admin.dashboard',
         ],
         [
+            'key' => 'ui-kit',
             'label' => 'UI Kit',
             'icon' => 'puzzle',
             'route' => 'admin.ui-kit',
         ],
         [
+            'key' => 'management',
             'label' => 'Quản lý',
             'icon' => 'folder',
             'children' => [
@@ -84,16 +92,19 @@ return [
             ],
         ],
         [
+            'key' => 'inventory',
             'label' => 'Kho hàng',
             'icon' => 'box',
             'route' => 'admin.inventory',
         ],
         [
+            'key' => 'orders',
             'label' => 'Đơn hàng',
             'icon' => 'truck',
             'route' => 'admin.orders.show',
         ],
         [
+            'key' => 'settings',
             'label' => 'Cài đặt',
             'icon' => 'settings',
             'route' => 'admin.settings',

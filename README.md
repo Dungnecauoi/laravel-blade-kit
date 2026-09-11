@@ -102,6 +102,34 @@ php artisan blade-kit:check vendor/acme/package-1 vendor/acme/package-2
 
 Configure default paths once in `config/admin.php` (`check_paths`) so plain `blade-kit:check` (no arguments) checks them automatically — useful as a pre-deploy or CI sanity check.
 
+## Registering menu items and settings tabs from another package
+
+A package's provider can't edit `config/admin.php`, so the sidebar and `/admin/settings` each expose a registry instead — call from any `boot()`, yours or a package's:
+
+```php
+// Add a top-level sidebar item:
+app(MenuRegistry::class)->register([
+    'label' => 'Media',
+    'icon' => 'image',
+    'route' => 'media.index',
+]);
+
+// Or nest under an existing item (config entries need a 'key' — see config/admin.php):
+app(MenuRegistry::class)->register($item, parentKey: 'management');
+
+// Add a tab to /admin/settings — the view is included as-is, so it's a
+// self-contained Blade file that computes whatever it needs, same as
+// resources/views/admin/settings/profile.blade.php does:
+app(SettingsRegistry::class)->register('media', [
+    'label' => 'Media',
+    'icon' => 'image',
+    'view' => 'laravel-media::settings-panel',
+    'order' => 20,
+]);
+```
+
+The core's own settings tabs (profile/permissions/appearance) are registered the same way, in `AdminServiceProvider` — there's no special-cased "built-in" path, so nothing is missing if you read that provider to see the pattern in use.
+
 ## Why files, not a package namespace
 
 Component libraries that keep everything inside `vendor/` are easy to install and hard to bend. The moment you need one button variant they didn't think of, you're forking the package or writing CSS overrides around it. Blade Kit ships as source you copy in once — every component is a plain `.blade.php` file in your own `resources/views/components/admin`, editable like any file you wrote yourself.

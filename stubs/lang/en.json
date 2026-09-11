@@ -27,6 +27,7 @@
     "Chưa có dữ liệu": "No data yet",
     "Chưa có dự án nào": "No projects yet",
     "Chưa có lịch sử nhập/xuất kho": "No stock in/out history yet",
+    "Chưa có mục cài đặt nào": "No settings items yet",
     "Chưa có tài khoản?": "Don't have an account?",
     "Chế độ tối": "Dark mode",
     "Chỉ cần sửa design token trong resources/css/app.css — toàn bộ component tự động ăn theo.": "Just edit the design tokens in resources/css/app.css — every component picks it up automatically.",
