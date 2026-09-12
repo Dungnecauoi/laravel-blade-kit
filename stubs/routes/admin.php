@@ -12,7 +12,10 @@ Route::get('locale/{locale}', LocaleController::class)->name('locale');
 // Public marketing page demo — uses x-layouts.guest, separate from the admin.* group below.
 Route::view('landing', 'admin.landing')->name('landing');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+// 'admin.auth' is a neutral alias registered by duxbo/laravel-core (a
+// pass-through by default) — installing a real auth package overrides it,
+// which is what actually turns login enforcement on for these routes.
+Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::get('ui-kit', UiKitController::class)->name('ui-kit');
     Route::view('settings', 'admin.settings')->name('settings');
