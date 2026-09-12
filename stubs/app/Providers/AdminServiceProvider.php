@@ -3,23 +3,22 @@
 namespace App\Providers;
 
 use App\Contracts\MenuServiceInterface;
-use App\Services\Admin\MenuRegistry;
 use App\Services\Admin\MenuService;
-use App\Services\Admin\SettingsRegistry;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use LaravelCore\Settings\SettingsRegistry;
 
 class AdminServiceProvider extends ServiceProvider
 {
     /**
-     * Bind admin-facing services here. Controllers and Blade views only ever
-     * depend on the contract, never on the concrete implementation.
+     * MenuRegistry and SettingsRegistry are bound by duxbo/laravel-core's
+     * own CoreServiceProvider (a real composer dependency of this kit, not
+     * a file copied in here) — this provider only uses them, the same as
+     * any other package would.
      */
     public function register(): void
     {
-        $this->app->singleton(MenuRegistry::class);
-        $this->app->singleton(SettingsRegistry::class);
         $this->app->singleton(MenuServiceInterface::class, MenuService::class);
     }
 

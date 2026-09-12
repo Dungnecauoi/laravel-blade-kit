@@ -11,10 +11,10 @@ Unlike most component libraries, Blade Kit doesn't hide behind a package namespa
 - **Layouts**: `<x-layouts.admin>` (sidebar, navbar, command palette, toast container), `<x-layouts.auth>` (centered card — login/register/forgot-password), `<x-layouts.blank>` (chrome-free — print/standalone pages), `<x-layouts.error>` (404/403/500), `<x-layouts.guest>` (public nav + mobile menu, no sidebar — landing/marketing pages).
 - **Marketing / landing page**: hero, feature grid, pricing plan, comparison table, testimonial, rating summary, CTA section, stats strip, logo cloud, team member, blog card, newsletter, footer — see `/landing` for most of them composed into one page.
 - **Navigation**: config-driven sidebar menu (`config/admin.php` + `MenuService`), breadcrumbs, command palette (⌘K). Sidebar collapses to icon-only on desktop (state remembered via `@alpinejs/persist`) and ships in `dark` (default) or `light` (`ADMIN_SIDEBAR_VARIANT=light`) variants. Dropdown/combobox/date-picker popups reposition automatically near screen edges via `@alpinejs/anchor` (Floating UI).
-- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, date range picker, time picker, color picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload, tag input, rich text editor (TipTap-powered — bold/italic/underline/lists/blockquote/links, with an undo/redo history), filter builder, multi-step wizard, OTP input.
+- **Forms**: input (variants: outline/filled, icon prefix/suffix, addon before/after, password toggle, clearable), textarea (autosize), select, combobox (searchable, single or multi-select with tags), number input (stepper), search input, date picker, date range picker, time picker, color picker, slider, toggle group (segmented control), rating, checkbox, radio, toggle, file upload, avatar upload, tag input, rich text editor (self-hosted TinyMCE, restyled to the kit's own tokens — image upload/browse are pluggable via `window.bladeKitMediaUpload` / `window.bladeKitMediaPicker` so an external media library can hook in without touching this component), filter builder, multi-step wizard, OTP input.
 - **Feedback**: alert, banner (dismissible announcement bar), toast, empty-state, skeleton, progress bar, spinner.
 - **Data display**: table (with sortable headers, bulk-select toolbar), pagination (classic + AJAX via Alpine/Axios), card, badge, avatar, avatar group, stat-card, accordion, timeline, stepper, description list, list group, kbd, tree view, permission matrix.
-- **Charts & scheduling**: line/bar/donut charts (pure SVG, no chart library), calendar, activity heatmap.
+- **Charts & scheduling**: line/bar/donut charts (Chart.js, theme-token-aware — colors resolve from `blade-kit.css`'s custom properties), calendar, activity heatmap.
 - **Dashboards & organization**: kanban board (drag & drop), file manager, context menu, carousel, chat bubble.
 - **Ecommerce & inventory**: stock badge, inventory table, stock-history log, product card, price tag, variant selector, product gallery, order timeline, order summary, payment method badge, invoice (printable).
 - **Overlays**: modal, drawer (slide-over), dropdown, tooltip, popover, popconfirm (lightweight inline confirm), lightbox (fullscreen image viewer).
@@ -44,7 +44,7 @@ The installer copies files into your app (skipping anything that already exists 
 
 ```bash
 npm install alpinejs @alpinejs/collapse @alpinejs/anchor @alpinejs/persist axios
-npm install @tiptap/core @tiptap/starter-kit @tiptap/extension-placeholder
+npm install chart.js tinymce
 ```
 
 Then, by hand:
@@ -104,9 +104,12 @@ Configure default paths once in `config/admin.php` (`check_paths`) so plain `bla
 
 ## Registering menu items and settings tabs from another package
 
-A package's provider can't edit `config/admin.php`, so the sidebar and `/admin/settings` each expose a registry instead — call from any `boot()`, yours or a package's:
+The sidebar and `/admin/settings` don't own their own registration — `MenuRegistry` and `SettingsRegistry` live in [`duxbo/laravel-core`](https://github.com/Dungnecauoi/laravel-core-kit), a real composer dependency of this kit (not a file copied into your app), so they're always present the moment Blade Kit is installed. Call from any `boot()`, yours or a package's:
 
 ```php
+use LaravelCore\Menu\MenuRegistry;
+use LaravelCore\Settings\SettingsRegistry;
+
 // Add a top-level sidebar item:
 app(MenuRegistry::class)->register([
     'label' => 'Media',
@@ -130,6 +133,8 @@ app(SettingsRegistry::class)->register('media', [
 
 The core's own settings tabs (profile/permissions/appearance) are registered the same way, in `AdminServiceProvider` — there's no special-cased "built-in" path, so nothing is missing if you read that provider to see the pattern in use.
 
+Because `MenuRegistry`/`SettingsRegistry` are shared with every other kit (a future `laravel-vue-kit`/`laravel-react-kit`), and `duxbo/laravel-core` also requires `duxbo/laravel-ai-core` directly, installing Blade Kit gets you `Duxbo\AiCore\AiManager` too — see that package's own README for usage.
+
 ## Why files, not a package namespace
 
 Component libraries that keep everything inside `vendor/` are easy to install and hard to bend. The moment you need one button variant they didn't think of, you're forking the package or writing CSS overrides around it. Blade Kit ships as source you copy in once — every component is a plain `.blade.php` file in your own `resources/views/components/admin`, editable like any file you wrote yourself.
@@ -147,4 +152,4 @@ Every button, badge, focus ring, and active nav state re-skins automatically.
 
 ## License
 
-MIT.
+MIT for everything in this repo. `tinymce` (used by `<x-admin.rich-text-editor>`) is a self-hosted dependency under its own GPL-2.0-or-later license — same terms as any other GPL JS you self-host, unaffected by this repo's own license.

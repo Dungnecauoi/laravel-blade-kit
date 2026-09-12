@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Contracts\MenuServiceInterface;
 use Illuminate\Support\Facades\Route;
+use LaravelCore\Menu\MenuRegistry;
 
 class MenuService implements MenuServiceInterface
 {
