@@ -135,6 +135,24 @@ The core's own settings tabs (profile/permissions/appearance) are registered the
 
 Because `MenuRegistry`/`SettingsRegistry` are shared with every other kit (a future `laravel-vue-kit`/`laravel-react-kit`), and `duxbo/laravel-core` also requires `duxbo/laravel-ai-core` directly, installing Blade Kit gets you `Duxbo\AiCore\AiManager` too — see that package's own README for usage.
 
+## Media library UI (for duxbo/laravel-media)
+
+`duxbo/laravel-media` is headless — no views of its own. Blade Kit ships the browser UI for it: folder tree, grid, drag-and-drop upload, bulk delete, all calling that package's own controllers directly (not reimplemented here) under the admin session instead of a token-based API guard.
+
+```bash
+composer require duxbo/laravel-media
+php artisan migrate
+```
+
+Then copy in the UI (not yet wired into `blade-kit:add` — do this by hand for now):
+
+1. Copy `routes/media.php` from this package's stubs into your app's `routes/`, and `resources/views/admin/media/index.blade.php` likewise.
+2. `routes/web.php` — add `require __DIR__.'/media.php';`
+3. `resources/js/app.js` — add `import './admin-media';` **before** `import './blade-kit';` (it registers the `mediaLibrary` Alpine component that `blade-kit.js`'s own `Alpine.start()` needs to already know about).
+4. `npm run build`
+
+Visit `/admin/media`. Verified end-to-end against a real `duxbo/laravel-media` install: real file upload, list, folder create, and delete all round-trip correctly over HTTP.
+
 ## Why files, not a package namespace
 
 Component libraries that keep everything inside `vendor/` are easy to install and hard to bend. The moment you need one button variant they didn't think of, you're forking the package or writing CSS overrides around it. Blade Kit ships as source you copy in once — every component is a plain `.blade.php` file in your own `resources/views/components/admin`, editable like any file you wrote yourself.
