@@ -1,27 +1,28 @@
 <x-layouts.auth :title="__('Đăng nhập')">
-    <x-slot:footer>
-        {{ __('Chưa có tài khoản?') }}
-        <a href="{{ route('auth-demo.register') }}" class="font-medium text-primary-600 hover:text-primary-500">{{ __('Đăng ký ngay') }}</a>
-    </x-slot:footer>
-
-    <form action="#" method="POST" class="space-y-5">
+    <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
 
-        <x-admin.input type="email" name="email" :label="__('Email')" placeholder="ban@vidu.com" required autofocus />
+        <x-admin.input
+            label="{{ __('Email') }}" name="email" type="email" value="{{ old('email') }}"
+            :error="$errors->first('email')" required autofocus autocomplete="username"
+        />
 
-        <div>
-            <x-admin.input type="password" name="password" :label="__('Mật khẩu')" placeholder="••••••••" required />
-            <div class="mt-2 text-right">
-                <a href="{{ route('auth-demo.forgot-password') }}" class="text-sm font-medium text-primary-600 hover:text-primary-500">
-                    {{ __('Quên mật khẩu?') }}
-                </a>
-            </div>
-        </div>
+        <x-admin.input
+            label="{{ __('Mật khẩu') }}" name="password" type="password"
+            :error="$errors->first('password')" required autocomplete="current-password"
+        />
 
-        <x-admin.checkbox name="remember" :label="__('Ghi nhớ đăng nhập')" />
+        <x-admin.checkbox name="remember" label="{{ __('Ghi nhớ đăng nhập') }}" />
 
-        <x-admin.button type="submit" variant="primary" class="w-full justify-center">
-            {{ __('Đăng nhập') }}
-        </x-admin.button>
+        <x-admin.button type="submit" class="w-full">{{ __('Đăng nhập') }}</x-admin.button>
     </form>
+
+    <x-slot:footer>
+        @if (config('laravel-auth.features.password_reset'))
+            <p><a href="{{ route('password.request') }}" class="font-medium text-primary-600 hover:text-primary-500">{{ __('Quên mật khẩu?') }}</a></p>
+        @endif
+        @if (config('laravel-auth.features.registration'))
+            <p>{{ __('Chưa có tài khoản?') }} <a href="{{ route('register') }}" class="font-medium text-primary-600 hover:text-primary-500">{{ __('Đăng ký') }}</a></p>
+        @endif
+    </x-slot:footer>
 </x-layouts.auth>
