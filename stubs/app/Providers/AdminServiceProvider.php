@@ -7,6 +7,7 @@ use App\Services\Admin\MenuService;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use LaravelCore\Menu\MenuRegistry;
 use LaravelCore\Settings\SettingsRegistry;
 
 class AdminServiceProvider extends ServiceProvider
@@ -25,6 +26,7 @@ class AdminServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerCoreSettingsPanels();
+        $this->registerBackupMenu();
 
         View::composer('admin.partials.sidebar-content', function ($view): void {
             $view->with('menuItems', $this->app->make(MenuServiceInterface::class)->items());
@@ -65,6 +67,27 @@ class AdminServiceProvider extends ServiceProvider
             'icon' => 'swatch',
             'view' => 'admin.settings.appearance',
             'order' => 30,
+        ]);
+    }
+
+    /**
+     * spatie/laravel-backup doesn't know MenuRegistry exists — it's a
+     * third-party package, not one of ours, so it can't register its own
+     * menu item the way duxbo/laravel-auth does. This app-level provider
+     * is what bridges the two, guarded so nothing breaks when that
+     * package isn't installed.
+     */
+    private function registerBackupMenu(): void
+    {
+        if (! class_exists(\Spatie\Backup\BackupServiceProvider::class)) {
+            return;
+        }
+
+        $this->app->make(MenuRegistry::class)->register([
+            'key' => 'backups',
+            'label' => 'Sao lưu',
+            'icon' => 'folder',
+            'route' => 'admin.backups.index',
         ]);
     }
 }
