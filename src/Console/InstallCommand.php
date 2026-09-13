@@ -26,7 +26,6 @@ class InstallCommand extends Command
         $this->copyFile($files, "{$stubs}/resources/css/blade-kit.css", resource_path('css/blade-kit.css'), $force);
         $this->copyFile($files, "{$stubs}/resources/js/blade-kit.js", resource_path('js/blade-kit.js'), $force);
         $this->copyFile($files, "{$stubs}/routes/admin.php", base_path('routes/admin.php'), $force);
-        $this->copyFile($files, "{$stubs}/routes/auth.php", base_path('routes/auth.php'), $force);
         $this->mergeLangJson($files, "{$stubs}/lang/en.json", base_path('lang/en.json'));
 
         $this->newLine();
@@ -55,16 +54,15 @@ class InstallCommand extends Command
         $this->line("     @import './blade-kit.css';");
         $this->line('  4. Include the routes — add to routes/web.php:');
         $this->line('     require __DIR__.\'/admin.php\';');
-        $this->line('     require __DIR__.\'/auth.php\';');
         $this->line('  5. Register the middleware in bootstrap/app.php inside withMiddleware():');
         $this->line('     $middleware->web(append: [\App\Http\Middleware\SetLocale::class]);');
         $this->line('  6. Register the provider in bootstrap/providers.php:');
         $this->line('     App\Providers\AdminServiceProvider::class');
         $this->line('  7. (Optional) Set APP_LOCALE=vi in .env — English falls back automatically via lang/en.json.');
         $this->line('  8. npm run build');
-        $this->line('  9. (Optional) composer require duxbo/laravel-auth — real login/register/2FA/users/roles/permissions');
-        $this->line('     work the moment it\'s installed; without it, routes/auth.php and the users/roles/permissions');
-        $this->line('     routes in routes/admin.php exist but their controllers 404 on the classes they call into.');
+        $this->line('  9. (Optional) composer require duxbo/laravel-auth && php artisan laravel-auth:install --stack=blade');
+        $this->line('     — that package owns and copies its own login/register/2FA/users/roles/permissions UI');
+        $this->line('     (using this kit\'s components), it\'s not part of blade-kit:install.');
         $this->newLine();
     }
 }
